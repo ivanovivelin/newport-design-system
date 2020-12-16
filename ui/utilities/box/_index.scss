@@ -1,0 +1,80 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Provides 1rem base padding and borders
+ *
+ * @selector .nds-box
+ * @modifier
+ */
+.nds-box {
+  @include box($borders: around);
+
+  /**
+   * @summary Changes padding to .25rem
+   *
+   * @selector .nds-box_xx-small
+   * @restrict .nds-box
+   * @modifier
+   */
+  &_xx-small,
+  &--xx-small {
+    padding: $spacing-xx-small;
+  }
+
+  /**
+   * @summary Changes padding to .5rem
+   *
+   * @selector .nds-box_x-small
+   * @restrict .nds-box
+   * @modifier
+   */
+  &_x-small,
+  &--x-small {
+    padding: $spacing-x-small;
+  }
+
+  /**
+   * @summary Changes padding to .75rem
+   *
+   * @selector .nds-box_small
+   * @restrict .nds-box
+   * @modifier
+   */
+  &_small,
+  &--small {
+    padding: $spacing-small;
+  }
+
+  // Deprecate for nds-border--around
+  &_border,
+  &--border {
+    @include box($padding: 0, $borders: around);
+  }
+}
+
+/**
+ * @summary Handles interactions if the box is applied to an actionable element
+ *
+ * @selector .nds-box_link
+ * @restrict .nds-box
+ * @modifier
+ */
+.nds-box_link {
+
+  &,
+  &:active,
+  &:focus,
+  &:hover {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    outline: 0;
+    border: $border-width-thin solid $color-border-selection-hover;
+    box-shadow: 0 0 0 1px $color-border-selection-hover inset;
+  }
+}

@@ -1,0 +1,12 @@
+parser: 'babel-eslint'
+extends:
+  - standard
+  - prettier
+rules:
+  semi: [2, 'always']
+  # These all need to be fixed
+  no-useless-escape: ['off']
+  no-unused-vars: ['off']
+  quotes: ['off']
+  eqeqeq: ['off']
+  import/no-duplicates: ['off']

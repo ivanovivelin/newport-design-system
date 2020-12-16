@@ -1,0 +1,180 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Container for icons
+ *
+ * @name base
+ * @selector .nds-icon_container
+ * @restrict span, div
+ * @notes Used when an icon with a background color is accompanied by `.nds-assistive-text` and also receives a `background-color` class
+ * @variant
+ */
+.nds-icon_container,
+.nds-icon__container {
+  @include deprecate('4.0.0', 'nds-icon__container is deprecated. Use nds-icon_container instead.');
+  display: inline-block;
+  border-radius: $border-radius-medium;
+
+  /**
+   * @summary Circle container for icons
+   * @selector .nds-icon_container_circle
+   * @restrict .nds-icon_container
+   */
+  &_circle,
+  &--circle {
+    padding: $spacing-x-small;
+    border-radius: $border-radius-circle;
+  }
+}
+
+[class*='nds-icon-action-'] {
+  padding: $spacing-x-small;
+  border-radius: $border-radius-circle;
+}
+// action-{icon-name} comes from the map
+@each $name, $color in $bg-actions-map {
+
+  .nds-icon-#{$name} {
+    background-color: $color;
+  }
+}
+
+
+// TODO: Depend on a correct map to generate icons named nds-icon-custom-customXX
+@each $name, $color in $bg-custom-map {
+  $prefix-length: str-length('custom-');
+  // In Sass, str-slice's first character is 1 (instead of 0 in other languages)
+  // so we need to add +1 when slicing
+  $id: str-slice($name, $prefix-length + 1);
+
+  // We generate both icons named:
+  // 1. nds-icon-custom-customXX (new: consistent with icon names)
+  // 2. nds-icon-custom-XX (legacy: depends on a map that is inconsistent with icon names)
+  @include deprecate('4.0.0', 'nds-icon-custom-XX classes are deprecated, use nds-icon-custom-customXX instead');
+
+  .nds-icon-custom-custom#{$id},
+  .nds-icon-#{$name} {
+    background-color: $color;
+    color: $color-text-inverse; // This is for text based icon created with just the first letters of the words
+  }
+}
+
+@include deprecate('3.0.0', 'This should be fixed at Theo’s level');
+$task2-monkey-patch: (
+  // The icon name is task2 but we had it as task-2
+  // (with an extra hyphen) so we're monkey patching the CSS to include the
+  // legacy token name in the CSS
+  'task-2': map-get($bg-standard-map, 'task2')
+);
+
+$bg-standard-map: map-merge($task2-monkey-patch, $bg-standard-map);
+
+@each $name, $color in $bg-standard-map {
+
+  .nds-icon-standard-#{$name} {
+    background-color: $color;
+  }
+}
+
+/**
+ * @selector .nds-icon
+ * @restrict .nds-icon_container svg, svg
+ */
+.nds-icon {
+  @include square($square-icon-medium-boundary);
+  fill: $color-text-icon-inverse;
+  outline: none;
+}
+
+// Crispy
+[class*='nds-icon-standard-'],
+[class*='nds-icon-action-'],
+[class*='nds-icon-custom-'] {
+
+  .nds-icon,
+  &.nds-icon {
+    border-radius: $border-radius-medium;
+  }
+}
+
+.nds-icon_xx-small,
+.nds-icon--xx-small {
+  @include square($square-icon-xx-small-content);
+  line-height: $line-height-reset;
+}
+
+/**
+ * @selector .nds-icon_x-small
+ * @restrict .nds-icon
+ * @modifier
+ * @group size
+ */
+.nds-icon_x-small,
+.nds-icon--x-small {
+  @include square($square-icon-utility-small);
+  line-height: $line-height-reset;
+}
+
+/**
+ * @selector .nds-icon_small
+ * @restrict .nds-icon
+ * @modifier
+ * @group size
+ */
+.nds-icon_small,
+.nds-icon--small {
+  @include square($square-icon-small-boundary);
+  line-height: $line-height-reset;
+}
+
+/**
+ * @selector .nds-icon_large
+ * @restrict .nds-icon
+ * @modifier
+ * @group size
+ */
+.nds-icon_large,
+.nds-icon--large {
+  @include square($square-icon-large-boundary);
+}
+
+/**
+ * @selector .nds-icon-text-default
+ * @restrict .nds-icon
+ * @modifier
+ * @group color
+ */
+.nds-icon-text-default {
+  fill: $color-text-icon-default;
+}
+
+/**
+ * @selector .nds-icon-text-warning
+ * @restrict .nds-icon
+ * @modifier
+ * @group color
+ */
+.nds-icon-text-warning {
+  fill: $color-text-warning;
+}
+
+/**
+ * @selector .nds-icon-text-error
+ * @restrict .nds-icon
+ * @modifier
+ * @group color
+ */
+.nds-icon-text-error {
+  fill: $color-text-error;
+}
+
+/**
+ * @selector .nds-icon-text-light
+ * @restrict .nds-icon, svg
+ * @modifier
+ * @group color
+ */
+.nds-icon-text-light {
+  fill: $color-text-input-icon;
+}

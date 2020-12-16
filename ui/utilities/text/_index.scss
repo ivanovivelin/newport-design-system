@@ -1,0 +1,284 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Creates the 13px regular body copy
+ *
+ * @selector .nds-text-body_regular
+ * @modifier
+ */
+.nds-text-body_regular,
+.nds-text-body--regular {
+  font-size: $font-size-medium;
+}
+
+/**
+ * @summary Creates a more pale-colored 12px copy
+ *
+ * @selector .nds-text-body_small
+ * @modifier
+ */
+.nds-text-body_small,
+.nds-text-body--small {
+  font-size: $font-size-small;
+}
+
+
+/**
+ * @summary Very large 28px heading
+ *
+ * @selector .nds-text-heading_large
+ * @modifier
+ */
+.nds-text-heading_large,
+.nds-text-heading--large {
+  font-weight: $font-weight-light;
+  font-size: $font-size-xx-large;
+  line-height: $line-height-heading;
+}
+
+/**
+ * @summary Large 20px heading
+ *
+ * @selector .nds-text-heading_medium
+ * @modifier
+ */
+.nds-text-heading_medium,
+.nds-text-heading--medium {
+  font-weight: $font-weight-light;
+  font-size: $font-size-x-large;
+  line-height: $line-height-heading;
+}
+
+/**
+ * @summary Smaller 16px heading
+ *
+ * @selector .nds-text-heading_small
+ * @modifier
+ */
+.nds-text-heading_small,
+.nds-text-heading--small {
+  font-size: $font-size-large;
+  line-height: $line-height-heading;
+}
+
+@include  deprecate('4.0.0', 'Use nds text-title instead') {
+
+  .nds-text-heading_label,
+  .nds-text-heading--label {
+    @include text-heading--label;
+  }
+
+  .nds-text-heading_label-normal,
+  .nds-text-heading--label-normal {
+    @include text-heading--label-normal;
+  }
+}
+
+/**
+ * @summary 12px heading that is not all caps
+ *
+ * @selector .nds-text-title
+ * @notes Usually labels small content areas like list sections.
+ * @modifier
+ */
+.nds-text-title {
+  @include text-heading--label-normal;
+}
+
+/**
+ * @summary All caps 12px heading
+ *
+ * @selector .nds-text-title_caps
+ * @notes Usually labels small content areas like tabs and page header titles.
+ * @modifier
+ */
+.nds-text-title_caps,
+.nds-text-title--caps {
+  @include text-heading--label-normal;
+  text-transform: uppercase;
+  letter-spacing: 0.0625rem;
+}
+
+
+/**
+ * @summary Resets line-height to browser default
+ *
+ * @selector .nds-line-height_reset
+ * @modifier
+ */
+.nds-line-height_reset,
+.nds-line-height--reset {
+  line-height: $line-height-reset;
+}
+
+
+/**
+ * @summary Default color of text
+ *
+ * @selector .nds-text-color_default
+ * @modifier
+ */
+.nds-text-color_default,
+.nds-text-color--default {
+  color: $color-text-default;
+}
+
+/**
+ * @summary Weak color of text
+ *
+ * @selector .nds-text-color_weak
+ * @modifier
+ */
+.nds-text-color_weak,
+.nds-text-color--weak {
+  color: $color-text-weak;
+}
+
+/**
+ * @summary Error color of text
+ *
+ * @selector .nds-text-color_error
+ * @modifier
+ */
+.nds-text-color_error,
+.nds-text-color--error {
+  color: $color-text-error;
+}
+
+/**
+ * @summary Default color of text on inversed background
+ *
+ * @selector .nds-text-color_inverse
+ * @modifier
+ */
+.nds-text-color_inverse,
+.nds-text-color--inverse {
+  color: $color-text-inverse;
+}
+
+/**
+ * @summary Weak color of text on inversed background
+ *
+ * @selector .nds-text-color_inverse-weak
+ * @modifier
+ */
+.nds-text-color_inverse-weak,
+.nds-text-color--inverse-weak {
+  color: $color-text-inverse-weak;
+}
+
+/**
+ * @summary Aligns text left
+ *
+ * @selector .nds-text-align_left
+ * @modifier
+ */
+.nds-text-align_left,
+.nds-text-align--left {
+  text-align: $left;
+}
+
+/**
+ * @summary Aligns text center
+ *
+ * @selector .nds-text-align_center
+ * @modifier
+ */
+.nds-text-align_center,
+.nds-text-align--center {
+  text-align: center;
+}
+
+/**
+ * @summary Aligns text right
+ *
+ * @selector .nds-text-align_right
+ * @modifier
+ */
+.nds-text-align_right,
+.nds-text-align--right {
+  text-align: $right;
+}
+
+
+/**
+ * @summary Adds default spacing and list styling within a wrapper
+ *
+ * @selector .nds-text-longform
+ * @notes Our application framework removes default text styling. This adds in margins to large areas
+ * @modifier
+ */
+.nds-text-longform {
+
+  h1,
+  h2,
+  h3,
+  p,
+  ul,
+  ol,
+  dl,
+  img {
+    margin-bottom: $spacing-small;
+  }
+
+  ul {
+    @include list-has-bullets;
+
+    ul {
+      list-style: circle;
+
+      ul {
+        list-style: square;
+      }
+    }
+  }
+
+  ol {
+    @include list-has-numbers;
+
+    ol {
+      list-style: lower-alpha;
+
+      ol {
+        list-style: lower-roman;
+      }
+    }
+  }
+
+  .nds-video {
+    display: block;
+    max-width: 100%;
+
+    &.nds-video_center,
+    &.nds-video--center {
+      margin: 0 auto;
+    }
+
+    &.nds-video_right,
+    &.nds-video--right {
+      margin: 0 0 0 auto;
+    }
+  }
+}
+
+
+/**
+ * @summary Creates large text
+ *
+ * @selector .nds-font-size-large
+ * @modifier
+ */
+.nds-font-size-large {
+  font-size: $font_size_heading_large;
+}
+
+/**
+ * @summary Creates extra large base
+ *
+ * @selector .nds-font-size-x-large
+ * @modifier
+ */
+.nds-font-size-x-large {
+  font-size: $font-size-x-large;
+}

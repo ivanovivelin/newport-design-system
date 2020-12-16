@@ -1,0 +1,68 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Initializes tile
+ *
+ * @name base
+ * @selector .nds-tile
+ * @restrict article
+ * @variant
+ */
+.nds-tile {
+
+  +.nds-tile {
+    margin-top: $spacing-x-small;
+  }
+
+  /**
+   * @selector .nds-tile__detail
+   * @restrict .nds-tile div
+   */
+  &__detail {
+    position: relative;
+  }
+
+  /**
+   * @selector .nds-tile__meta
+   * @restrict .nds-tile div
+   */
+  &__meta {
+    color: $color-text-default;
+  }
+}
+
+.nds-tile_board,
+.nds-tile--board {
+  position: relative;
+
+  &__icon {
+    @include square($square-icon-medium-content);
+    position: absolute;
+    bottom: $spacing-xx-small;
+    #{$right}: $spacing-xx-small;
+  }
+
+  .nds-has-alert {
+    padding-#{$right}: $spacing-large;
+  }
+}
+
+
+.nds-tile_brand {
+  position: relative;
+
+  @include border(around, $border-radius-medium);
+
+  border-color: $color-brand;
+  padding: $spacing-small;
+}
+
+.nds-tile_neutral {
+  position: relative;
+
+  @include border(around, $border-radius-medium);
+
+  border-color: $color-border;
+  padding: $spacing-small;
+}

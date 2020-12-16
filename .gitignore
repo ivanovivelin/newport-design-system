@@ -1,0 +1,53 @@
+# Ignore all hidden dotfiles
+.*
+
+# Whitelist useful dotfiles
+!/.scss-linters/
+!/.babelrc
+!/.editorconfig
+!/.eslintignore
+!/.eslintrc.yml
+!/.gitattributes
+!/.gitignore
+!/.hound.yml
+!/.scss-lint.yml
+!/.stylelintrc.yml
+!/.ndsrc.defaults.yml
+!/.stylestatsrc
+!/.travis.yml
+!/.storybook
+
+# Add a .gitkeep file in an empty
+# directory to check it in the repository
+!.gitkeep
+
+# for vrt
+*snap.json
+
+# Ignore generated styles
+/assets/styles
+
+# Ignore generated scripts
+/assets/scripts
+
+# Ignore modules
+/node_modules
+
+# Ignore assets
+/_nds/images/themes/oneSalesforce
+
+# Ignore logs
+*.log
+
+# Ignore code coverage reports
+coverage
+
+# Ignore tokens distribution
+/design-tokens/dist
+
+# Legacy folders
+/git_modules
+
+scripts/sfdc/staticresources/newport.resource
+
+dist

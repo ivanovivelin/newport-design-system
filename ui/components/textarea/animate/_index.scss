@@ -1,0 +1,20 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+
+/**
+ * @summary Custom animation with label on textarea focus
+ *
+ * @name animate
+ * @selector .nds-form-element__control-animated-label
+ * @restrict .nds-textarea
+ * @variant
+ */
+
+.nds-textarea {
+  padding-top: 0;
+  margin-top: 0.25rem;
+  letter-spacing: 1px;
+  font-size: $font-size-medium-a;
+  font-weight: 400;
+}

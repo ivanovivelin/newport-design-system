@@ -1,0 +1,98 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Creates button group container
+ *
+ * @name base
+ * @selector .nds-button-group
+ * @restrict div
+ * @variant
+ */
+.nds-button-group,
+.nds-button-group-list {
+  display: inline-flex;
+
+  .nds-button {
+    border-radius: 0;
+    border-width: $border-width-thin;
+  }
+}
+
+.nds-button-group .nds-button + .nds-button,
+.nds-button-group .nds-button + .nds-button_last .nds-button,
+.nds-button-group .nds-button + .nds-button--last .nds-button,
+.nds-button-group-list li + li .nds-button {
+  margin-#{$left}: (-1 * $border-width-thin);
+}
+
+// These selectors must remain in long hand in order to zero out borders that we don't want on last-child buttons
+.nds-button-group-list li:first-child .nds-button,
+.nds-button-group .nds-button:first-child {
+  border-radius: corner-values($button-border-radius 0 0 $button-border-radius);
+}
+
+/**
+ * These selectors must remain in long hand in order to zero out borders that
+ * we don't want on last-child or :only-child wrapped buttons
+ *
+ * @selector .nds-button_last
+ * @restrict .nds-button-group div, .nds-button-group-list div
+ */
+.nds-button-group .nds-button:last-child,
+.nds-button-group-list li:last-child .nds-button,
+.nds-button-group .nds-button_last .nds-button,
+.nds-button-group .nds-button--last .nds-button,
+.nds-button-group .nds-button.nds-button_last,
+.nds-button-group .nds-button.nds-button--last,
+.nds-button-group .nds-button_last .nds-button:only-child,
+.nds-button-group .nds-button--last .nds-button:only-child,
+.nds-button-group .nds-button.nds-button_last,
+.nds-button-group .nds-button.nds-button--last {
+  border-radius: corner-values(0 $button-border-radius $button-border-radius 0);
+}
+
+// The following rule must stay at the **bottom** due to the cascade
+.nds-button-group .nds-button:only-child,
+.nds-button-group-list li:only-child .nds-button {
+  border-radius: $button-border-radius;
+}
+
+.nds-button-group + .nds-button-group,
+.nds-button-group + .nds-button-group-list,
+.nds-button-group + .nds-button,
+.nds-button-group-list + .nds-button-group-list,
+.nds-button-group-list + .nds-button-group,
+.nds-button-group-list + .nds-button {
+  margin-#{$left}: $spacing-xx-small;
+}
+
+// The .nds-button--last class should be placed on the wrapper
+// of a button that's the final one in a button-group
+//
+// A bit of history:
+//
+// Button-groups were originally built to have no wrappers in their midst.
+//
+// And all buttons happily coexisted perfectly in the land of :last-child...
+// but then along came the big bad, "Buttons in a group can come from all
+// different teams and some are wrapped to contain a dropdown, etc.
+// This code doesn't work now."
+//
+// There was much booing and hissing and stamping of feet.
+//
+// Then, Pragmatism reared its head and suggested, "Hey guys, maybe we have
+// to supply a way for people to indicate when a button is the last one."
+//
+// We had situations where various buttons were wrapped and everyone believed
+// it was the :last-child, or no one did. So the last button had to raise its
+// hand and shout loudly, "I am .button--last!".
+//
+// Then there were issues where the last button could be wearing a wrap, thus
+// the class actually needed to be placed on it's cute little sweater instead.
+//
+// And the poor little button became warm indeed. And it got a little smelly.
+//
+// Sometimes Pragmatism wins and sometimes she loses. This time she won.
+//
+// The end of the story of button-groups.

@@ -1,0 +1,178 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * A scoped tabset style has a closed container with a defined border. Initialize
+ * a scoped tab set by applying the `.nds-tab_scoped` class to the containing
+ * `<div>` around the tab list and tab panels. The `<ul>` element also requires
+ * the class `.nds-tab_scoped__nav` to prevent styles from bleeding into nested tabs.
+ *
+ * @summary Initializes scoped tabs
+ *
+ * @name base
+ * @selector .nds-tabs_scoped
+ * @restrict div
+ * @required
+ * @variant
+ */
+.nds-tabs_scoped,
+.nds-tabs--scoped {
+  @include tabs;
+
+  /**
+   * Creates the container for the default tabs
+   *
+   * @selector .nds-tabs_scoped__nav
+   * @restrict .nds-tabs_scoped ul
+   * @required
+   */
+  &__nav {
+    @include tabs-nav;
+    background-color: $color-contrast-primary;
+    border: $border-width-thin solid $color-border-button-default;
+    border-radius: corner-values($border-radius-medium $border-radius-medium 0 0);
+  }
+
+  @include deprecate('4.0.0') {
+
+    .nds-tabs__item {
+      position: relative;
+      margin-bottom: ($border-width-thin * -1);
+
+      + .nds-tabs__item {
+        margin-#{$left}: ($border-width-thin * -1);
+      }
+
+      &:first-child > a {
+        border-#{$left}: 0;
+        border-radius: corner-values($border-radius-medium 0 0 0);
+      }
+
+      > a {
+        @include tabs-link;
+        height: $line-height-tab;
+        line-height: $line-height-tab;
+        padding: 0 $spacing-large;
+        color: $color-text-weak;
+        background-clip: padding-box;
+        border-#{$left}: $border-width-thin solid transparent;
+        border-#{$right}: $border-width-thin solid transparent;
+
+        &:hover,
+        &:focus {
+          text-decoration: none;
+          color: $color-text-link-hover;
+          border-color: $color-border;
+        }
+      }
+      // scss-lint:disable SelectorDepth
+      .nds-active > a {
+        background-color: $color-background-alt;
+        color: $color-text-link;
+        border-color: $color-border;
+
+        &:focus {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    > .nds-tabs__content {
+      background-color: $color-background-alt;
+      border: $border-width-thin solid $color-border-button-default;
+      border-top: 0;
+      border-radius: corner-values(0 0 $border-radius-medium $border-radius-medium);
+      padding: $spacing-medium;
+    }
+  }
+}
+
+/**
+ * Styles each list item as a single tab
+ *
+ * @selector .nds-tabs_scoped__item
+ * @restrict .nds-tabs_scoped ul li
+ * @required
+ */
+.nds-tabs_scoped__item,
+.nds-tabs--scoped__item {
+  position: relative;
+  margin-bottom: ($border-width-thin * -1);
+
+  + .nds-tabs_scoped__item,
+  + .nds-tabs--scoped__item {
+    margin-#{$left}: ($border-width-thin * -1);
+  }
+
+  &:first-child .nds-tabs_scoped__link,
+  &:first-child .nds-tabs--scoped__link {
+    border-#{$left}: 0;
+    border-radius: corner-values($border-radius-medium 0 0 0);
+  }
+}
+
+/**
+ * Styles each tab content wrapper
+ *
+ * @selector .nds-tabs_scoped__content
+ * @restrict .nds-tabs_scoped div
+ * @required
+ */
+.nds-tabs_scoped__content,
+.nds-tabs--scoped__content {
+  background-color: $color-foreground-primary;
+  border: $border-width-thin solid $color-border-button-default;
+  border-top: 0;
+  border-radius: corner-values(0 0 $border-radius-medium $border-radius-medium);
+  padding: $spacing-medium;
+}
+
+/**
+ * Styles each actionable element inside each tab item
+ *
+ * @selector .nds-tabs_scoped__link
+ * @restrict .nds-tabs_scoped__item a
+ * @required
+ */
+.nds-tabs_scoped__link,
+.nds-tabs--scoped__link {
+  @include tabs-link;
+  height: $line-height-tab;
+  line-height: $line-height-tab;
+  padding: 0 $spacing-medium;
+  color: $color-text-weak;
+  background-clip: padding-box;
+  border: {
+    #{$left}: $border-width-thin solid transparent;
+    #{$right}: $border-width-thin solid transparent;
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: $color-text-link-hover;
+    border-color: $color-border;
+  }
+}
+
+/**
+ * Active state for a tab item
+ *
+ * @selector .nds-is-active
+ * @restrict .nds-tabs_scoped__item
+ * @notes Required on the `<li>` element that is associated with the active tab panel
+ * @modifier
+ */
+.nds-active .nds-tabs_scoped__link,
+.nds-active .nds-tabs--scoped__link,
+.nds-is-active .nds-tabs_scoped__link,
+.nds-is-active .nds-tabs--scoped__link {
+  background-color: $color-foreground-primary;
+  color: $color-text-link;
+  border-color: $color-border;
+  font-weight: $tabs-font-weight;
+
+  &:focus {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,138 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Initiates a datepicker component
+ *
+ * @name base
+ * @selector .nds-datepicker
+ * @restrict div
+ * @variant
+ */
+.nds-datepicker {
+  padding: 0;
+  font-size: $font-size-small;
+
+  th,
+  td {
+    text-align: center;
+  }
+
+  th {
+    padding: $spacing-x-small;
+    font-weight: $font-weight-regular;
+    color: $color-text-label;
+  }
+
+  td {
+    padding: $spacing-xx-small;
+    text-align: center;
+    font-size: $font-size-small;
+
+    /**
+     * @summary Style for calendar days
+     *
+     * @selector .nds-day
+     * @restrict .nds-datepicker td span
+     */
+    > .nds-day {
+      @include square($square-icon-medium-boundary);
+      display: block;
+      position: relative;
+      min-width: $square-icon-medium-boundary;
+      line-height: $square-icon-medium-boundary;
+      border-radius: $border-radius-circle;
+      margin: auto;
+    }
+
+    /**
+     * @summary Indicates today
+     *
+     * @selector .nds-is-today
+     * @restrict .nds-datepicker td
+     */
+    &:hover:not(.nds-disabled-text) > .nds-day,
+    &:focus:not(.nds-disabled-text) > .nds-day,
+    &.nds-is-today > .nds-day {
+      background: $color-background-row-hover;
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: 0;
+
+      > .nds-day {
+        box-shadow: $color-border-brand-dark 0 0 0 1px inset;
+      }
+    }
+
+    /**
+     * @summary Indicates selected days
+     *
+     * @selector .nds-is-selected
+     * @restrict .nds-datepicker td
+     */
+    &.nds-is-selected:not(.nds-is-today) > .nds-day {
+      background: $color-background-button-brand-hover;
+      color: $color-text-button-brand-hover;
+    }
+
+    &.nds-is-selected:focus > .nds-day {
+      background: $color-background-row-hover;
+      box-shadow: $color-border-brand-dark 0 0 3px;
+      color: currentColor;
+    }
+  }
+
+  /**
+   * @summary Aligns filter items horizontally
+   *
+   * @selector .nds-datepicker__filter
+   * @restrict .nds-datepicker div
+   */
+  &__filter {
+    padding: $spacing-xx-small;
+
+    .nds-select {
+      border: 1px solid $color-border-input;
+      border-radius: $border-radius-medium;
+      padding-#{$left}: 0.5rem;
+      padding-#{$right}: 1.8rem;
+    }
+  }
+
+  /**
+   * @summary Spaces out month filter
+   *
+   * @selector .nds-datepicker__month_filter
+   * @restrict .nds-datepicker div
+   */
+  &__filter_month,
+  &__filter--month {
+    padding: side-values(0 $spacing-xx-small 0 0);
+
+    .nds-button__icon {
+      transform: rotate(if-ltr(0, 180deg));
+    }
+  }
+
+  /**
+   * @summary Container of the month table
+   *
+   * @selector .nds-datepicker__month
+   * @restrict .nds-datepicker table
+   */
+  &__month {
+    font-size: $font-size-small;
+  }
+}
+
+/**
+ * @summary Indicates days that are in previous/next months
+ *
+ * @selector .nds-disabled-text
+ * @restrict .nds-datepicker td
+ */
+.nds-disabled-text {
+  color: $color-text-button-default-disabled;
+}

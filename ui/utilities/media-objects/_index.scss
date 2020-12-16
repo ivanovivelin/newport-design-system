@@ -1,0 +1,153 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Creates media object
+ *
+ * @selector .nds-media
+ * @modifier
+ */
+.nds-media {
+  display: flex;
+  align-items: flex-start;
+
+  /**
+   * Defines the figure area
+   *
+   * @selector .nds-media__figure
+   */
+  &__figure {
+    flex-shrink: 0;
+    margin-#{$right}: $spacing-small;
+
+    &_fixed-width {
+      min-width: $square-icon-large-boundary; // accommodate largest icon size
+    }
+  }
+
+  /**
+   * Defines the body area
+   *
+   * @selector .nds-media__body
+   * @modifier
+   */
+  &__body {
+    flex: 1;
+    min-width: 0; // This fixes an issue with truncation inside flexbox due to the changes in flex basis (already in FFOX, coming to Chrome)
+  }
+
+  &__body,
+  &__body > :last-child { // @TODO: Watch this - overreaching?
+    margin-bottom: 0;
+  }
+}
+
+.nds-media-body-iefix {
+  flex-shrink: 0;
+  flex-basis: auto;
+}
+
+/**
+ * Adjusts whitespace on smaller media objects
+ *
+ * @selector .nds-media_small
+ * @modifier
+ */
+.nds-media_small .nds-media__figure,
+.nds-media--small .nds-media__figure {
+  margin-#{$right}: $spacing-xx-small;
+}
+
+.nds-media_small .nds-media__figure_reverse,
+.nds-media--small .nds-media__figure--reverse {
+  margin-#{$left}: $spacing-xx-small;
+}
+
+/**
+ * Adjusts whitespace on larger media objects
+ *
+ * @selector .nds-media_large
+ * @modifier
+ */
+.nds-media_large .nds-media__figure,
+.nds-media--large .nds-media__figure {
+  margin-#{$right}: $spacing-large;
+}
+
+.nds-media_large .nds-media__figure_reverse,
+.nds-media--large .nds-media__figure--reverse {
+  margin-#{$left}: $spacing-large;
+}
+
+/**
+ * Aligns the content in the .nds-media__body to the middle of the .nds-media__figure
+ *
+ * @selector .nds-media_center
+ * @modifier
+ */
+.nds-media_center,
+.nds-media--center {
+  align-items: center;
+}
+
+/**
+ * Defines the figure area on the other side
+ *
+ * @selector .nds-media__figure_reverse
+ * @modifier
+ */
+.nds-media__figure_reverse,
+.nds-media__figure--reverse {
+  margin: side-values(0 0 0 $spacing-small);
+}
+
+@include deprecate('4.0.0') {
+
+  .nds-media_reverse,
+  .nds-media--reverse {
+
+    > .nds-media__figure {
+      order: 1;
+    }
+
+    &.nds-media_small .nds-media__figure,
+    &.nds-media--small .nds-media__figure {
+      margin-#{$left}: $spacing-xx-small;
+    }
+  }
+
+  .nds-media_double,
+  .nds-media--double {
+
+    > .nds-media__figure {
+      order: 1;
+    }
+
+    .nds-media__figure_reverse,
+    .nds-media__figure--reverse {
+      order: 3;
+      margin: side-values(0 0 0 $spacing-medium);
+    }
+
+    .nds-media__body {
+      order: 2;
+    }
+  }
+}
+
+@include mq-medium-max {
+  /**
+   * @summary .nds-media__figure and .nds-media__body stack on smaller screens
+   *
+   * @selector .nds-media_responsive
+   * @modifer
+   */
+  .nds-media_responsive,
+  .nds-media--responsive {
+    display: block;
+
+    .nds-media__figure {
+      margin: 0 0 $spacing-small;
+    }
+  }
+}

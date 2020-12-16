@@ -1,0 +1,138 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+.nds-theme {
+  /**
+   * @summary Sets the background color to white
+   *
+   * @selector .nds-theme_default
+   * @modifier
+   */
+  &_default,
+  &--default {
+    @include theme(default);
+  }
+
+  /**
+   * @summary Sets the background color to gray
+   *
+   * @selector .nds-theme_shade
+   * @modifier
+   */
+  &_shade,
+  &--shade {
+    @include theme(shade);
+  }
+
+  /**
+   * @summary Sets the background color to dark blue
+   *
+   * @selector .nds-theme_inverse
+   * @modifier
+   */
+  &_inverse,
+  &--inverse {
+    @include theme(inverse);
+    border-color: $color-background-inverse;
+  }
+
+  /**
+   * @summary Sets the background color to darker blue
+   *
+   * @selector .nds-theme_alt-inverse
+   * @modifier
+   */
+  &_alt-inverse,
+  &--alt-inverse {
+    @include theme(alt-inverse);
+    border-color: $color-background-alt-inverse;
+  }
+
+  /**
+   * @summary Sets the background color to green
+   *
+   * @selector .nds-theme_success
+   * @modifier
+   */
+  &_success,
+  &--success {
+    @include inverse-links;
+    background-color: $color-background-toast-success;
+  }
+
+  /**
+   * @summary Sets the background color to gray-ish blue
+   *
+   * @selector .nds-theme_info
+   * @modifier
+   */
+  &_info,
+  &--info {
+    @include inverse-links;
+    background-color: $color-background-toast;
+  }
+
+  /**
+   * @summary Sets the background color to yellow
+   *
+   * @selector .nds-theme_warning
+   * @modifier
+   */
+  &_warning,
+  &--warning {
+    background-color: $color-background-warning;
+    color: $color-text-default;
+
+    .nds-icon,
+    .nds-button__icon {
+      fill: $color-text-icon-default;
+    }
+
+    a:not(.nds-button--neutral),
+    button:not(.nds-button--neutral) {
+      color: $color-text-default;
+      text-decoration: underline;
+    }
+  }
+
+  /**
+   * @summary Sets the background color to red
+   *
+   * @selector .nds-theme_error
+   * @modifier
+   */
+  &_error,
+  &--error {
+    @include inverse-links;
+    background-color: $color-background-toast-error;
+  }
+
+  /**
+   * @summary Sets the background color to black
+   *
+   * @selector .nds-theme_offline
+   * @modifier
+   */
+  &_offline,
+  &--offline {
+    @include inverse-links;
+    background-color: #444;
+  }
+
+  /**
+   * @summary Adds striped background
+   *
+   * @selector .nds-theme_alert-texture
+   * @modifier
+   */
+  &_alert-texture,
+  &--alert-texture {
+    @include gradient-striped;
+  }
+
+  // Is this being used?
+  &_inverse-text,
+  &--inverse-text {
+    @include inverse-links;
+  }
+}

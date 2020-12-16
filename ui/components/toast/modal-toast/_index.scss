@@ -1,0 +1,18 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+@include deprecate('4.0.0', 'No longer a pattern that should be used') {
+
+  .nds-modal__header {
+
+    .nds-notify-container,
+    .nds-notify_container {
+      position: absolute;
+    }
+
+    .nds-notify_toast,
+    .nds-notify--toast {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,228 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * The default tab set style encapsulates everything that is underneath it
+ * without enclosing it visually. Initialize a default tab set by applying the
+ * `.nds-tab_default` class to the containing `<div>` around the tab list and
+ * tab panels. The `<ul>` element also requires the class `.nds-tab_default__nav`
+ * to prevent styles from bleeding into nested tabs.
+ *
+ * The overflow tab style is provided as a tab item type that acts as a menu
+ * component and appears as a tab item. It could contain those tab items that
+ * don't all fit in a horizontal orientation. Initialize a default tab set and
+ * in the last tab item of the set, apply the additional classes `nds-dropdown-trigger`
+ * and `.nds-tabs__item_overflow`. Include an `<a>` element to contain the
+ * tab item label like the other tab items. After the `<a>` element, the
+ * `.nds-dropdown` segment of a search overflow menu component is used. The
+ * `nds-dropdown__list` element also then requires a `nds-dropdown_length-X`
+ * class, where X is the number of items to show in it.
+ *
+ * @summary Initializes a default tablist
+ *
+ * @name base
+ * @selector .nds-tabs_default
+ * @restrict div
+ * @variant
+ */
+.nds-tabs_default,
+.nds-tabs--default {
+  @include tabs;
+  background-color: $color-foreground-primary;
+
+  /**
+   * @summary Creates the container for the default tabs
+   * @selector .nds-tabs_default__nav
+   * @restrict .nds-tabs_default ul
+   */
+  &__nav {
+    @include tabs-nav;
+    border-bottom: $border-width-thick solid $color-border;
+  }
+
+  @include deprecate('4.0.0') {
+
+    .nds-tabs__item {
+
+      + .nds-tabs__item {
+        @include mq-medium-min {
+          margin-#{$left}: $spacing-large;
+        }
+      }
+
+      > a {
+        @include tabs-link;
+        height: $line-height-tab;
+        line-height: $line-height-tab;
+        border-bottom: $border-width-thick solid transparent;
+        padding: 0 $spacing-x-small;
+        color: $color-text-action-label;
+
+        @include mq-medium-min {
+          padding: 0 $spacing-medium;
+        }
+
+        &:hover,
+        &:focus {
+          text-decoration: none;
+          border-color: $color-border-tab-selected;
+          color: $color-text-action-label-active;
+        }
+      }
+
+      &.nds-active a {
+        border-color: $color-border-tab-selected;
+        color: $color-text-action-label-active;
+
+        &:focus {
+          color: $color-text-tab-label-selected;
+        }
+      }
+    }
+
+    > .nds-tabs__content {
+      @include tabs-content;
+    }
+  }
+
+  /**
+   * @summary A tab item that has an overflow menu
+   * @selector .nds-tabs__item_overflow
+   * @restrict .nds-tabs_default__item
+   */
+  .nds-tabs__item_overflow,
+  .nds-tabs__item--overflow {
+    overflow: visible;
+  }
+}
+
+/**
+ * @summary Styles each list item as a single tab
+ * @selector .nds-tabs_default__item
+ * @restrict .nds-tabs_default ul li
+ */
+.nds-tabs_default__item,
+.nds-tabs--default__item {
+  color: $color-text-action-label;
+  position: relative;
+  padding: 0 $spacing-small;
+  margin-bottom: ($border-width-thick * -1);
+  text-transform: uppercase;
+  letter-spacing: 0.0625em;
+
+  &:after {
+    display: block;
+    content: '';
+    bottom: 0;
+    #{$left}: 0;
+    #{$right}: 0;
+    position: absolute;
+    height: $border-width-thick;
+  }
+
+  /**
+   * @summary Active state for a tab item
+   * @selector .nds-is-active
+   * @restrict .nds-tabs_default__item
+   * @notes Required on the `<li>` element that is associated with the active tab panel
+   * @modifier
+   */
+  &.nds-active,
+  &.nds-is-active {
+    color: $color-text-action-label-active;
+
+    &:after {
+      background-color: $color-brand-dark;
+    }
+
+    .nds-tabs_default__link,
+    .nds-tabs--default__link {
+      font-weight: $tabs-font-weight;
+
+      &:hover {
+        color: $color-text-action-label-active;
+      }
+    }
+  }
+
+  &:hover {
+
+    &:after {
+      background-color: $color-brand-dark;
+    }
+  }
+
+  /**
+   * @summary Focus state for a tab item
+   * @selector .nds-has-focus
+   * @restrict .nds-tabs_default__item
+   * @modifier
+   */
+  &:focus,
+  &.nds-has-focus {
+    outline: 0;
+    color: $color-text-tab-label-selected;
+
+    &:after {
+      height: ($border-width-thick + 1);
+      background-color: $color-brand-dark;
+    }
+  }
+
+  // Remove box-shadow when nds-button is used in conjunction with class
+  .nds-tabs_default__link:focus,
+  .nds-tabs--default__link:focus {
+    box-shadow: none;
+  }
+
+  /**
+  * @summary Creates styles for a Tab Item when its tab has new activity in
+  * @selector .nds-has-notification
+  * @restrict .nds-tabs_default__item
+  */
+  &.nds-has-notification {
+    background: $color-background-notification-new;
+    color: $color-text-default;
+
+    &:after {
+      background-color: $color-border;
+    }
+
+    &:hover {
+
+      &:after {
+        background-color: $color-brand-dark;
+      }
+    }
+  }
+}
+
+/**
+ * @summary Styles each actionable element inside each tab item
+ * @selector .nds-tabs_default__link
+ * @restrict .nds-tabs_default__item a
+ */
+.nds-tabs_default__link,
+.nds-tabs--default__link {
+  @include tabs-link;
+  height: $line-height-tab;
+  line-height: $line-height-tab;
+  color: currentColor;
+  border: 0;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    box-shadow: none;
+  }
+}
+
+/**
+ * @summary Styles each tab content wrapper
+ * @selector .nds-tabs_default__content
+ * @restrict .nds-tabs_default div
+ */
+.nds-tabs_default__content,
+.nds-tabs--default__content {
+  @include tabs-content;
+}

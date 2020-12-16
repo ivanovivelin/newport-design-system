@@ -1,0 +1,213 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * Container for feed item comments
+ *
+ * @selector .nds-feed__item-comments
+ * @restrict .nds-feed__item div
+ * @notes Contains comment replies and publisher
+ * @required
+ */
+.nds-feed__item-comments {
+  background: $color-background-post;
+  border-top: $border-width-thin solid $color-border;
+  border-bottom: $border-width-thin solid $color-border;
+
+  .nds-comment {
+    padding: $spacing-x-small $spacing-medium;
+  }
+}
+
+/**
+ * @name post
+ * @selector .nds-post
+ * @restrict .nds-feed article
+ * @variant
+ */
+.nds-post {
+  background: $color-background-alt;
+  padding: $spacing-small $spacing-medium;
+
+  @include mq-medium-max {
+    border-top: $border-width-thin solid $color-border;
+  }
+
+  @include mq-large-min {
+    padding: 0 $spacing-medium $spacing-x-small;
+  }
+
+  /**
+   * Header region of a feed post
+   *
+   * @selector .nds-post__header
+   * @restrict .nds-post header
+   */
+  &__header {
+    margin-bottom: $spacing-small;
+  }
+
+  /**
+   * Content region of a feed post
+   *
+   * @selector .nds-post__content
+   * @restrict .nds-post div
+   */
+  &__content {
+    margin-bottom: $spacing-small;
+
+    @include mq-medium-min {
+      margin-bottom: $spacing-large;
+    }
+  }
+
+  /**
+   * Footer region of a feed post
+   *
+   * @selector .nds-post__footer
+   * @restrict .nds-post footer
+   */
+  &__footer {
+    display: flex;
+    font-size: $font-size-small;
+    flex-direction: column;
+
+    @include mq-medium-min {
+      flex-direction: row;
+    }
+  }
+}
+
+/**
+ * Footer region that contains quick action items for post
+ *
+ * @selector .nds-post__footer-actions-list
+ * @restrict .nds-post__footer ul
+ */
+.nds-post__footer-actions-list {
+  justify-content: space-between;
+  text-align: center;
+  order: 1;
+
+  @include mq-small-max {
+    border-top: $border-width-thin solid $color-border;
+    margin: 0 ($spacing-small * -1) ($spacing-small * -1);
+    padding: 0 $spacing-medium;
+  }
+
+  @include mq-medium-min {
+    order: 0;
+  }
+}
+
+/**
+ * Action items within the feed post footer
+ *
+ * @selector .nds-post__footer-action
+ * @restrict .nds-post__footer-actions-list button
+ */
+.nds-post__footer-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-default;
+  padding: $spacing-small 0;
+  line-height: 1;
+
+  @include mq-medium-min {
+    margin-#{$right}: $spacing-medium;
+    padding: 0;
+  }
+
+  .nds-icon {
+    margin-#{$right}: $spacing-xx-small;
+  }
+
+  /**
+   * Active state for like button
+   *
+   * @selector .nds-is-active
+   * @restrict .nds-post__footer-action
+   * @modifier
+   */
+  &:hover,
+  &:focus,
+  &.nds-is-active {
+    color: $color-text-link-hover;
+    text-decoration: none;
+
+    .nds-icon {
+      fill: currentColor;
+    }
+  }
+}
+
+/**
+ * Footer region that contains read only items for post
+ *
+ * @selector .nds-post__footer-meta-list
+ * @restrict .nds-post__footer ul
+ */
+.nds-post__footer-meta-list {
+  margin-bottom: $spacing-medium;
+
+  @include mq-medium-min {
+    margin: {
+      #{$left}: auto;
+      bottom: 0;
+    }
+  }
+}
+
+// A feed post is altered when inside a narrow region of the application
+// We take the existing media-queries properties that are being used on
+// nds-post and applying them to nds-post when it finds a parent class
+// named .nds-region--narrow.
+//
+// If styles are being updated via media-queries, please make sure you update
+// the .nds-region--narrow references as the goal is for nds-post to
+// inherit the styles from mobile.
+.nds-region_narrow,
+.nds-region--narrow {
+
+  // Modifying .nds-post when inside a region with the
+  // class .nds-region--narrow
+  .nds-post {
+    border: 0;
+    padding: $spacing-small $spacing-medium;
+  }
+
+  // Modifying .nds-post__content when inside a region with the class
+  // .nds-region--narrow
+  .nds-post__content {
+    margin-bottom: $spacing-small;
+  }
+
+  // Modifying .nds-post__footer when inside a region with the class
+  // .nds-region--narrow
+  .nds-post__footer {
+    flex-direction: column;
+  }
+
+  .nds-post__footer-action {
+    padding: $spacing-small 0;
+  }
+
+  // Modifying .nds-post__footer-actions-list when inside a region with the
+  // class .nds-region--narrow
+  .nds-post__footer-actions-list {
+    order: 1;
+    border-top: $border-width-thin solid $color-border;
+    margin: 0 ($spacing-small * -1) ($spacing-small * -1);
+    padding: 0 $spacing-medium;
+  }
+
+  // Modifying .nds-post__footer-meta-list when inside a region with the
+  // class .nds-region--narrow
+  .nds-post__footer-meta-list {
+    margin: {
+      #{$left}: 0;
+      bottom: $spacing-medium;
+    }
+  }
+}

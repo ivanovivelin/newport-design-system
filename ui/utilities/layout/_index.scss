@@ -1,0 +1,57 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Global margin that can be applied to any element
+ *
+ * @selector .nds-has-buffer
+ * @modifier
+ */
+.nds-has-buffer {
+  margin: $component-spacing-margin;
+}
+
+/**
+ * @summary Global margin reset that can be applied to any element
+ *
+ * @selector .nds-has-full-bleed
+ * @modifier
+ */
+.nds-has-full-bleed {
+  margin: 0;
+}
+
+/**
+ * @summary Assumes element below is connected
+ *
+ * @selector .nds-has-bottom-magnet
+ * @modifier
+ */
+.nds-has-bottom-magnet {
+  /* stylelint-disable declaration-no-important */
+  margin-bottom: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  /* stylelint-enable declaration-no-important */
+}
+
+/**
+ * @summary Assumes element above is connected
+ *
+ * @selector .nds-has-top-magnet
+ * @modifier
+ */
+.nds-has-top-magnet {
+  /* stylelint-disable declaration-no-important */
+  margin-top: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  /* stylelint-enable declaration-no-important */
+
+  &.nds-has-buffer {
+    margin-bottom: 0;
+    border-radius: 0;
+    border-top: 0;
+    box-shadow: none;
+  }
+}

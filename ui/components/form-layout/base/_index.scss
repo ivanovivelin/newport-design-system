@@ -1,0 +1,117 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @name base
+ * @selector .nds-form
+ * @restrict form, div, fieldset
+ * @variant
+ */
+
+/**
+ * Vertically aligns form label and control, provides spacing between form elements
+ *
+ * @selector .nds-form_stacked
+ * @restrict .nds-form:not(.nds-form_compound)
+ * @modifier
+ * @group layout
+ */
+.nds-form_stacked .nds-form-element,
+.nds-form--stacked .nds-form-element {
+  display: block;
+
+  + .nds-form-element {
+    @include form-element-vertical-spacing;
+  }
+
+  .nds-checkbox,
+  .nds-radio {
+    display: block;
+  }
+}
+
+/**
+ * Horizontally aligns a single form label and control on the same line
+ *
+ * @selector .nds-form_horizontal
+ * @restrict .nds-form:not(.nds-form_compound)
+ * @modifier
+ * @group layout
+ */
+.nds-form_horizontal,
+.nds-form--horizontal {
+  @include mq-medium-min {
+    text-align: $right;
+  }
+
+  .nds-form-element {
+
+    > .nds-form-element__legend,
+    > .nds-form-element__label {
+      @include mq-medium-min {
+        float: $left;
+        text-align: $right;
+        display: inline-block;
+        width: 33%;
+        vertical-align: top;
+        position: relative;
+        top: (($line-height-button / 2) - ($line-height-text / 2));
+        margin-#{$right}: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    + .nds-form-element {
+      @include form-element-vertical-spacing;
+    }
+  }
+
+  .nds-form-element__control {
+    width: 100%;
+
+    @include mq-medium-min {
+      width: 66%;
+      display: inline-block;
+      text-align: $left;
+    }
+  }
+}
+
+/**
+ * Horizontally align multiple form elements on the same axis
+ *
+ * @selector .nds-form_inline
+ * @restrict .nds-form
+ */
+.nds-form_inline,
+.nds-form--inline {
+
+  .nds-form-element,
+  .nds-form-element__label,
+  .nds-form-element__control {
+    display: block;
+  }
+
+  .nds-form-element + .nds-form-element {
+    margin-top: $spacing-small;
+  }
+
+  @include mq-small-min {
+
+    .nds-form-element {
+      margin-#{$right}: $spacing-x-small;
+
+      + .nds-form-element {
+        margin-top: 0;
+      }
+    }
+
+    .nds-form-element,
+    .nds-form-element__label,
+    .nds-form-element__control {
+      display: inline-block;
+      vertical-align: middle;
+      margin-bottom: 0;
+    }
+  }
+}

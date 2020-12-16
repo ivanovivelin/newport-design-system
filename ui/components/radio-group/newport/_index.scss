@@ -1,0 +1,390 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+* @summary Vlocity Newport branded radio selector with image
+*
+* @name newport
+* @selector .nds-radio_custom-group
+* @restrict .nds-radio
+* @variant
+*/
+
+.nds-radio_custom-group {
+  position: relative;
+}
+
+.nds-radio_custom-group {
+  border: 0;
+}
+
+.nds-cont-width {
+  width: 10rem;
+}
+
+.nds-radio_button-group,
+.nds-radio--button-group {
+  display: inline-flex;
+  border-radius: $border-radius-medium;
+  flex-wrap: wrap;
+}
+
+.nds-radio_custom-group {
+
+  /**
+  * @selector .nds-radio_button
+  * @restrict .nds-radio_button-group span
+  */
+  .nds-radio_button,
+  .nds-radio--button {
+    display: flex;
+    border: 0;
+    background-clip: padding-box;
+    margin-#{$right}: 1.25rem;
+    margin-bottom: 2.5rem;
+    border-radius: $border-radius-medium;
+
+    /**
+    * Create styled button when adjacent to the input[radio] element
+    *
+    * @selector .nds-radio_faux
+    * @restrict .nds-radio_button span
+    */
+    .nds-radio_faux,
+    .nds-radio--faux {
+      padding-#{$left}: $spacing-medium;
+      padding-#{$right}: $spacing-medium;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+
+
+    // Apply left borders to anything radio button after the first button
+    +.nds-radio_button,
+    +.nds-radio--button {
+      margin: 0;
+      margin-#{$right}: 1.25rem;
+      margin-bottom: 2.5rem;
+      border-#{$left}: 0;
+
+      .nds-radio_button__label {
+        width: 100%;
+        border: 1px solid $button-color-border-primary;
+      }
+    }
+
+    // Dealing with box shadows on specific n children
+    // of the button group
+    &:first-child>.nds-radio_faux,
+    &:first-child>.nds-radio--faux,
+    &:first-child>.nds-radio_button__label,
+    &:first-child>.nds-radio--button__label {
+      border: 1px solid $button-color-border-primary;
+      width: 100%;
+      border-radius: 0.25rem;
+    }
+
+    // The middle selector doesn't seem to be applied anywhere? I didn't find a .button--last anywhere?
+    &:last-child>.nds-radio_faux,
+    &:last-child>.nds-radio--faux,
+    .nds-button_last>.nds-radio_faux,
+    .nds-button--last>.nds-radio--faux,
+    &:last-child>.nds-radio_button__label,
+    &:last-child>.nds-radio--button__label {
+      border-radius: $border-radius-medium;
+      width: 100%;
+    }
+
+    // Hide input and style radio--faux
+    [type="radio"] {
+      @include square(1px);
+      border: 0;
+      clip: rect(0 0 0 0);
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+
+      // Checked State with Interactions
+      // +/~ nds-radio--faux selector are for legacy support
+      &:checked+.nds-radio_faux,
+      &:checked+.nds-radio--faux,
+      &:checked~.nds-radio_faux,
+      &:checked~.nds-radio--faux,
+      &:checked+.nds-radio_button__label,
+      &:checked+.nds-radio--button__label {
+        background-color: transparent;
+        color: $color-text-button-brand;
+        width: 100%;
+        border: 2px solid $color-brand;
+
+        // Need something stronger when the input is checked
+        &:hover,
+        &:focus {
+          background-color: transparent;
+        }
+      }
+
+      // Focus State
+      // +/~ nds-radio--faux selector are for legacy support
+      &:focus+.nds-radio_faux,
+      &:focus+.nds-radio--faux,
+      &:focus~.nds-radio_faux,
+      &:focus~.nds-radio--faux,
+      &:focus+.nds-radio_button__label,
+      &:focus+.nds-radio--button__label {
+        outline: 0;
+        box-shadow: none;
+        z-index: $z-index-default; // Raises box shadow above adjacent buttons
+      }
+
+      // Disabled State
+      // +/~ nds-radio--faux selector are for legacy support
+      &[disabled]+.nds-radio_faux,
+      &[disabled]+.nds-radio--faux,
+      &[disabled]~.nds-radio_faux,
+      &[disabled]~.nds-radio--faux,
+      &[disabled]+.nds-radio_button__label,
+      &[disabled]+.nds-radio--button__label {
+        background-color: transparent;
+        color: $color-text-button-default-disabled;
+
+        &:hover,
+        &:focus {
+          cursor: default;
+        }
+      }
+
+      &[disabled]:checked+.nds-radio_faux,
+      &[disabled]:checked+.nds-radio--faux,
+      &[disabled]:checked~.nds-radio_faux,
+      &[disabled]:checked~.nds-radio--faux,
+      &[disabled]:checked+.nds-radio_button__label,
+      &[disabled]:checked+.nds-radio--button__label {
+
+        &:hover,
+        &:focus {
+          background-color: transparent;
+          color: $color-text-button-default-disabled;
+        }
+      }
+    }
+  }
+
+  .nds-radio_custom-faux {
+    position: absolute;
+    bottom: -1.8rem;
+    width: 100%;
+    text-align: center;
+    padding: 0 10px;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    font-weight: 400;
+    color: $color-background-brand-primary;
+    font-size: 0.875rem;
+    #{$left}: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .nds-radio_button__label img {
+    position: relative;
+    float: #{$left};
+    top: 50%;
+    #{$left}: 50%;
+    max-width: 100%;
+    max-height: 100%;
+    transform: translate(if-ltr(-50%, 50%), -50%);
+    background-color: $color-background-input;
+  }
+
+  .nds-radio_button__label div.nds-title,
+  .nds-radio_button__label span.nds-title {
+    position: relative;
+    float: #{$left};
+    top: 50%;
+    #{$left}: 50%;
+    transform: translate(if-ltr(-50%, 50%), -50%);
+    background-color: $color-background-input;
+    width: 97%;
+    white-space: initial;
+    line-height: 1em;
+    max-height: 4em;
+    display: flex;
+    box-orient: vertical;
+    -webkit-line-clamp: 4;
+    padding: 0;
+  }
+
+  /**
+  * Label element inside of a radio button
+  *
+  * @selector .nds-radio_button__label
+  * @restrict .nds-radio_button label
+  */
+  .nds-radio_button__label,
+  .nds-radio--button__label {
+    background-color: transparent;
+    border-radius: $border-radius-medium;
+    padding: 0;
+    width: 100%;
+
+    &:hover,
+    &:focus {
+      cursor: pointer;
+    }
+  }
+}
+
+fieldset.nds-form-element+.nds-has-error div div.nds-has-error small:first-child {
+  margin-top: 0;
+}
+
+.nds-radio_custom-group .nds-button.nds-radio_button.nds-radio_aspect-ratio {
+  position: relative;
+
+  span.nds-radio_button__label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.nds-form-element__control.nds-radio_horizontal {
+  position: relative;
+  height: 2.0625rem;
+
+  .nds-radio_button-group {
+    position: absolute;
+
+    .nds-button.nds-radio_button {
+
+      .nds-radio_button__label {
+        background-color: inherit;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.nds-radio_vertical .nds-radio .nds-form-element__label {
+  color: $color-blue-text-secondary;
+}
+
+.nds-form-element__control.nds-vertical_radio {
+  display: flex;
+  flex-direction: column;
+}
+
+.nds-form-element__control.nds-vertical_radio .nds-radio,
+.nds-form-element__control.nds-horizontal_radio .nds-radio {
+  margin: 0 1rem 0.5rem 0;
+}
+
+.nds-horizontal_radio label div.nds-radio__label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 11rem;
+}
+
+.nds-vertical_radio label div.nds-radio__label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.nds-radio_custom-group {
+  margin-bottom: 2rem;
+}
+
+.nds-radio_custom-group.nds-static-wrapper input[type="radio"]:checked+.nds-img_select-container {
+  border: 2px solid $color-border-input-active;
+}
+
+.nds-radio_custom-group.nds-img-wrapper_cont label.nds-img_no-width-height {
+  cursor: pointer;
+}
+
+.nds-radio_custom-group.nds-img-wrapper_cont input[type="radio"]:checked+label.nds-img_no-width-height {
+  border: 2px solid $color-border-input-active;
+}
+
+.nds-img_select-container {
+  position: relative;
+  display: inline-block;
+  margin: .5rem 1rem .5rem 0;
+}
+
+.nds-radio_custom-group.nds-static-wrapper .nds-img_select-container .nds-img-item_select-container.nds-img_option-width-height {
+  width: 100%;
+  height: 100%;
+}
+
+.nds-img-wrapper_cont {
+  position: relative;
+}
+
+.nds-radio_custom-group.nds-static-wrapper .nds-radio__label.nds-img_select-container {
+  border: 2px solid #d8dde6;
+}
+
+.nds-img-item {
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.nds-img-item-caption {
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.nds-radio_custom-group .nds-img-item_select-container {
+  cursor: pointer;
+}
+
+.nds-radio_custom-group.nds-img-wrapper_cont .nds-img_no-width-height .nds-img-item_select-container {
+  width: 100%;
+  height: 100%;
+}
+
+.nds-radio_custom-group .nds-img_option-width-height {
+  display: inline-block;
+  height: inherit;
+  width: inherit;
+  border-radius: $border-radius-medium;
+  position: relative;
+}
+
+.nds-radio_custom_container .nds-img_no-width-height {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 1.875rem;
+  border: 2px solid $newport-gray-border-primary;
+  margin-right: 1.25rem;
+}
+
+.nds-caption-out_cont {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+  width: inherit;
+  padding-top: 0.625rem;
+}

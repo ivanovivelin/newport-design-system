@@ -1,0 +1,52 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Forces element to scroll horizontally and vertically when content exceeds element's width and height
+ *
+ * @selector .nds-scrollable
+ * @modifier
+ */
+.nds-scrollable {
+  @include enable-ios-momentum-scrolling;
+  overflow: auto;
+}
+
+/**
+ * @summary Forces overflow items to not scroll within element's width and height
+ *
+ * @selector .nds-scrollable_none
+ * @modifier
+ */
+.nds-scrollable_none,
+.nds-scrollable--none {
+  overflow: hidden;
+}
+
+/**
+ * @summary Forces element to scroll vertically when content exceeds element's height
+ *
+ * @selector .nds-scrollable_y
+ * @modifier
+ */
+.nds-scrollable_y,
+.nds-scrollable--y {
+  @include enable-ios-momentum-scrolling;
+  max-height: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+/**
+ * @summary Forces element to scroll horizontally when content exceeds element's width
+ *
+ * @selector .nds-scrollable_x
+ * @modifier
+ */
+.nds-scrollable_x,
+.nds-scrollable--x {
+  @include enable-ios-momentum-scrolling;
+  max-width: 100%;
+  overflow: hidden;
+  overflow-x: auto;
+}

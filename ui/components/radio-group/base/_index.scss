@@ -1,0 +1,150 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Initializes radio button
+ *
+ * @name base
+ * @selector .nds-radio
+ * @restrict span
+ * @variant
+ */
+.nds-radio {
+  display: inline-block;
+
+  /**
+   * Creates a custom styled radio button
+   *
+   * @selector .nds-radio_faux
+   * @restrict [class*='nds-radio'] span
+   */
+  .nds-radio_faux,
+  .nds-radio--faux {
+    @include square($square-icon-medium-content);
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    border: $border-width-thick solid $color-border-input;
+    border-radius: $border-radius-circle;
+    background: $color-background-input;
+    transition: border $duration-quickly linear, background-color $duration-quickly linear;
+  }
+
+  .nds-form-element__label {
+    display: inline;
+    vertical-align: middle;
+    font-size: $font-size-medium-a;
+    color: $color-input-icon-blue-hue;
+  }
+
+  [type="radio"] {
+    @include square(1px);
+    border: 0;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+
+    &:checked+.nds-radio_faux,
+    &:checked+.nds-radio--faux,
+    &:checked~.nds-radio_faux,
+    &:checked~.nds-radio--faux,
+    &:checked+.nds-radio__label .nds-radio_faux,
+    &:checked+.nds-radio__label .nds-radio--faux {
+      background: $color-background-input;
+      border-color: $color-brand;
+
+      &:after {
+        @include square(0.5rem);
+        content: '';
+        position: absolute;
+        top: 50%;
+        #{$left}: 50%;
+        transform: translate3d(if-ltr(-50%, 50%), -50%, 0);
+        border-radius: $border-radius-circle;
+        background: $color-brand;
+      }
+    }
+
+    &:focus+.nds-radio_faux,
+    &:focus+.nds-radio--faux,
+    &:focus~.nds-radio_faux,
+    &:focus~.nds-radio--faux,
+    &:focus+.nds-radio__label .nds-radio_faux,
+    &:focus+.nds-radio__label .nds-radio--faux {
+      border-color: $color-border-input-active;
+      box-shadow: $shadow-button-focus;
+    }
+
+    &[disabled] {
+      // scss-lint:disable NestingDepth
+      cursor: not-allowed;
+      user-select: none;
+
+      ~.nds-radio_faux,
+      ~.nds-radio--faux,
+      +.nds-radio__label .nds-radio_faux,
+      +.nds-radio__label .nds-radio--faux {
+        background-color: $color-background-input-disabled;
+        border-color: $color-border-input-disabled;
+      }
+    }
+  }
+}
+
+.nds-form-element__control .nds-checkbox,
+.nds-form-element__control .nds-radio {
+  display: inline-block;
+}
+
+.nds-read-only {
+
+  [type="radio"],
+  [type="radio"]:checked {
+
+    ~.nds-radio_faux,
+    ~.nds-radio--faux,
+    +.nds-radio__label .nds-radio_faux,
+    +.nds-radio__label .nds-radio--faux {
+      background-color: $color-background-input-disabled;
+      border-color: $color-border-input-disabled;
+    }
+
+  }
+}
+
+.nds-has-error .nds-radio [type='radio'] {
+
+  +.nds-radio_faux,
+  +.nds-radio--faux,
+  ~.nds-radio_faux,
+  ~.nds-radio--faux,
+  +.nds-radio__label .nds-radio_faux,
+  +.nds-radio__label .nds-radio--faux {
+    border-color: $color-border-error;
+    border-width: $border-width-thick;
+  }
+
+  &:checked+.nds-radio_faux,
+  &:checked+.nds-radio--faux,
+  &:checked~.nds-radio_faux,
+  &:checked~.nds-radio--faux,
+  &:checked+.nds-radio__label .nds-radio_faux,
+  &:checked+.nds-radio__label .nds-radio--faux {
+    background: $color-background-input;
+
+    &:after {
+      background: $color-background-error;
+    }
+  }
+}
+
+.nds-form-element .nds-radio [type='radio']+.nds-radio_faux,
+.nds-form-element .nds-radio [type='radio']+.nds-radio--faux,
+.nds-form-element .nds-radio [type='radio']~.nds-radio_faux,
+.nds-form-element .nds-radio [type='radio']~.nds-radio--faux,
+.nds-radio [type='radio']+.nds-radio__label .nds-radio_faux,
+.nds-radio [type='radio']+.nds-radio__label .nds-radio--faux {
+  margin-#{$right}: 0.25rem;
+}

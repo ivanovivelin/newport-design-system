@@ -1,0 +1,148 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * Fixed bar at the bottom of viewport, contains items
+ *
+ * @name base
+ * @selector .nds-utility-bar_container
+ * @restrict footer
+ * @support dev-ready
+ * @variant
+ */
+.nds-utility-bar_container {
+  position: relative;
+}
+
+/**
+ * Fixed bar at the bottom of viewport, contains items
+ *
+ * @selector .nds-utility-bar
+ * @restrict .nds-utility-bar_container ul
+ */
+.nds-utility-bar {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  #{$left}: 0;
+  width: 100%;
+  height: $height-docked-bar;
+  background: $color-background-docked-panel;
+  box-shadow: $shadow-docked;
+  z-index: $z-index-docked;
+
+  /**
+   * Notification indicator
+   *
+   * @selector .nds-indicator_unread
+   * @restrict .nds-utility-bar abbr
+   */
+  .nds-indicator_unread,
+  .nds-indicator--unread {
+    background: $utility-bar-color-background-notification-badge;
+    top: $spacing-x-small;
+  }
+}
+
+/**
+ * Items that invoke specific utility bar panel
+ *
+ * @selector .nds-utility-bar__item
+ * @restrict .nds-utility-bar li
+ */
+.nds-utility-bar__item {
+  display: flex;
+  margin-#{$right}: $border-width-thin;
+}
+
+/**
+ * Button that invokes utility panel
+ *
+ * @selector .nds-utility-bar__action
+ * @restrict .nds-utility-bar button
+ */
+.nds-utility-bar__action {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 $spacing-small;
+  border-radius: 0;
+  border: 0;
+  color: $color-text-default;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    #{$left}: 0;
+    #{$right}: 0;
+    height: 2px;
+    background: transparent;
+  }
+
+  &:focus,
+  &:hover {
+    box-shadow: none;
+  }
+
+  &:focus:after {
+    height: ($border-width-thick + 1px);
+    background: $color-brand;
+  }
+
+  &:hover,
+  &:focus {
+    background: $color-background-utility-bar-hover;
+    color: inherit;
+  }
+
+  /**
+   * @selector .nds-is-active
+   * @restrict .nds-utility-bar__action
+   * @modifier
+   */
+  &.nds-is-active {
+    background: $color-background-utility-bar-hover;
+    color: inherit;
+
+    &:after {
+      background: $color-brand;
+    }
+  }
+}
+
+/**
+ * Container for utility bar item text, allows for multi-line text output
+ *
+ * @selector .nds-utility-bar__text
+ * @restrict .nds-utility-bar__action > span
+ */
+.nds-utility-bar__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-align: $left;
+}
+
+/**
+ * Creates styles for a utility bar item when it has a notification within its panel
+ *
+ * @selector .nds-has-notification
+ * @restrict .nds-utility-bar__item
+ */
+.nds-has-notification {
+
+  .nds-utility-bar__action {
+    background: $color-background-info;
+    color: $color-text-inverse;
+
+    &:hover,
+    &:focus {
+      background: $color-background-alt-inverse;
+    }
+
+    &:focus:after {
+      background: $utility-bar-color-background-notification-focus;
+    }
+  }
+}

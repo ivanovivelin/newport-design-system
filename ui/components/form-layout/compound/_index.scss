@@ -1,0 +1,39 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Creates a form that consists of multiple form groups
+ *
+ * @name compound
+ * @selector .nds-form_compound
+ * @restrict .nds-form
+ * @variant
+ */
+
+.nds-form_compound,
+.nds-form--compound {
+
+  .nds-form-element__row {
+    display: flex;
+    margin-bottom: $spacing-x-small;
+
+    + .nds-form-element__row {
+      clear: both;
+    }
+
+    .nds-form-element + .nds-form-element {
+      margin-#{$left}: $spacing-x-small;
+    }
+  }
+
+  @include deprecate('4.0.0') {
+
+    .nds-form-element__control {
+      position: relative;
+
+      + .nds-form-element__control {
+        padding-#{$left}: $spacing-x-small;
+      }
+    }
+  }
+}

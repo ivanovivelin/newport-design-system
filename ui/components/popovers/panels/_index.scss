@@ -1,0 +1,57 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @name panels
+ * @selector .nds-popover_panel
+ * @restrict .nds-popover
+ * @variant
+ */
+.nds-popover_panel,
+.nds-popover--panel {
+
+  .nds-popover__header {
+    background: $color-background;
+    padding: $spacing-large $spacing-large $spacing-small;
+    border-top-left-radius: calc(#{$border-radius-medium} - #{$border-width-thin});
+    border-top-right-radius: calc(#{$border-radius-medium} - #{$border-width-thin});
+    border-bottom: 0;
+  }
+
+  .nds-popover__body {
+    padding: 0;
+  }
+
+  .nds-popover__body-list {
+    padding: $spacing-medium $spacing-large;
+    border-top: $border-width-thin solid $color-border;
+  }
+
+  // Deal with Nubbin Color
+  &.nds-nubbin_left-top,
+  &.nds-nubbin--left-top,
+  &.nds-nubbin_right-top,
+  &.nds-nubbin--right-top,
+  &.nds-nubbin_top-left,
+  &.nds-nubbin--top-left,
+  &.nds-nubbin_top-right,
+  &.nds-nubbin--top-right {
+
+    &:before,
+    &:after {
+      background: $color-background;
+    }
+  }
+
+  // Align nubbin to the icon
+  &.nds-nubbin_left-top,
+  &.nds-nubbin--left-top,
+  &.nds-nubbin_right-top,
+  &.nds-nubbin--right-top {
+
+    &:before,
+    &:after {
+      top: ($spacing-large + $spacing-small);
+    }
+  }
+}

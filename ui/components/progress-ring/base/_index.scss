@@ -1,0 +1,134 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * Progress Ring component
+ *
+ * @summary Progress Ring component
+ *
+ * @variant
+ * @name base
+ * @selector .nds-progress-ring
+ * @restrict div
+ */
+.nds-progress-ring {
+  position: relative;
+  display: inline-block;
+  height: $square-icon-utility-large;
+  width: $square-icon-utility-large;
+  border-radius: $square-icon-utility-large;
+  background: $color-border;
+
+  .nds-icon_container {
+    line-height: 0;
+  }
+}
+
+/**
+ * @summary Progress indicator
+ *
+ * @selector .nds-progress-ring__progress
+ * @restrict .nds-progress-ring div
+ */
+.nds-progress-ring__progress {
+  transform: scale(-1, 1) rotate(-90deg);
+
+  svg {
+    width: 100%;
+  }
+}
+
+/**
+ *
+ * @selector .nds-progress-ring__path
+ * @restrict .nds-progress-ring__progress path
+ */
+.nds-progress-ring__path {
+  fill: $color-background-success;
+}
+
+/**
+ * @summary Progress ring content area
+ *
+ * @selector .nds-progress-ring__content
+ * @restrict .nds-progress-ring > div
+ */
+.nds-progress-ring__content {
+  position: absolute;
+  top: $progress-ring-width;
+  #{$right}: $progress-ring-width;
+  bottom: $progress-ring-width;
+  #{$left}: $progress-ring-width;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $square-icon-utility-large;
+  background: $color-background-progress-ring-content;
+
+  .nds-icon {
+    width: $square-icon-small-content;
+  }
+}
+
+/**
+ * @summary Warning colors
+ *
+ * @selector .nds-progress-ring_warning
+ * @restrict .nds-progress-ring
+ * @modifier
+ * @group theme
+ */
+.nds-progress-ring_warning {
+
+  .nds-progress-ring__content {
+    background: $color-background-progress-ring-content;
+  }
+
+  .nds-icon,
+  .nds-progress-ring__path {
+    fill: $color-background-warning;
+  }
+}
+
+/**
+ * @summary Expired colors
+ *
+ * @selector .nds-progress-ring_expired
+ * @restrict .nds-progress-ring
+ * @modifier
+ * @group theme
+ */
+.nds-progress-ring_expired {
+
+  .nds-progress-ring__content {
+    background: $color-background-progress-ring-content;
+  }
+
+  .nds-icon,
+  .nds-progress-ring__path {
+    fill: $color-background-error;
+  }
+}
+
+/**
+ * @summary Complete colors
+ *
+ * @selector .nds-progress-ring_complete
+ * @restrict .nds-progress-ring
+ * @modifier
+ * @group theme
+ */
+.nds-progress-ring_complete {
+
+  .nds-icon {
+    fill: $color-background-progress-ring-content;
+  }
+
+  .nds-progress-ring__path {
+    fill: $color-background-success;
+  }
+
+  .nds-progress-ring__content {
+    background: $color-background-success;
+  }
+}

@@ -1,0 +1,546 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * Icons can be included on either the right, left, or both sides of an option.
+ *
+ * When using icons (e.g. checkmarks) to indicate selected state:
+ * - all selectable items should contain an icon
+ * - icons of non-selected are hidden by default
+ * - a selected item reveals its icon when `aria-checked="true"` is applied to its `menuitemcheckbox` or `menuitemradio` child (e.g. `<a role="menuitemcheckbox" aria-checked="true" ...>`).
+ *
+ * @summary Initializes a trigger element around the dropdown
+ * @name dropdown
+ * @selector .nds-dropdown-trigger
+ * @restrict div, span, li
+ * @variant
+ */
+.nds-dropdown-trigger {
+  position: relative;
+  display: inline-block;
+
+  .nds-dropdown {
+    top: 100%;
+  }
+
+  .nds-dropdown_bottom,
+  .nds-dropdown--bottom {
+    top: auto;
+  }
+
+  @include deprecate('4.0.0', 'Use .nds-dropdown-trigger--hover instead') {
+
+    .nds-dropdown {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity $duration-quickly linear, visibility $duration-quickly linear;
+    }
+
+    &:hover,
+    &:focus {
+      outline: 0;
+
+      .nds-dropdown {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity $duration-quickly linear, visibility $duration-quickly linear;
+      }
+    }
+  }
+
+  /**
+   * @summary If someone is using javascript for click to toggle - this modifier will help
+   * @selector .nds-dropdown-trigger_hover
+   * @restrict .nds-dropdown-trigger
+   */
+  &_hover,
+  &--hover {
+
+    .nds-dropdown {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity $duration-quickly linear, visibility $duration-quickly linear;
+    }
+
+    &:hover,
+    &:focus {
+      outline: 0;
+
+      .nds-dropdown {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity $duration-quickly linear, visibility $duration-quickly linear;
+      }
+    }
+  }
+
+  /**
+   * @summary If someone is using javascript for click to toggle - this modifier will help
+   * @selector .nds-dropdown-trigger_click
+   * @restrict .nds-dropdown-trigger
+   */
+  &_click,
+  &--click {
+
+    .nds-dropdown {
+      display: none;
+    }
+
+    /**
+     * @summary Opens dropdown menu when invoked on click
+     * @selector .nds-is-open
+     * @restrict .nds-dropdown-trigger_click
+     * @modifier
+     * @group visibility
+     */
+    &.nds-is-open .nds-dropdown {
+      display: block;
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  // Deal with positioning when target is just an icon
+  > [class*="nds-button_icon"],
+  > [class*="nds-button--icon"] {
+
+    ~ .nds-dropdown_left[class*="nds-nubbin"],
+    ~ .nds-dropdown--left[class*="nds-nubbin"] {
+      #{$left}: ($spacing-x-small * -1);
+    }
+
+    ~ .nds-dropdown_right[class*="nds-nubbin"],
+    ~ .nds-dropdown--right[class*="nds-nubbin"] {
+      #{$right}: ($spacing-x-small * -1);
+    }
+  }
+}
+
+/**
+ * @summary Initializes dropdown
+ * @selector .nds-dropdown
+ * @restrict .nds-dropdown-trigger div, .nds-dropdown-trigger ul
+ * @notes Applies positioning and container styles, by default, dropdown appears below and center of target
+ */
+.nds-dropdown {
+  position: absolute;
+  z-index: $z-index-dropdown;
+  #{$left}: 50%;
+  float: $left;
+  min-width: $size-xx-small;
+  max-width: $size-medium;
+  margin-top: $spacing-xxx-small;
+  margin-bottom: $spacing-xxx-small;
+  border: $border-width-thin solid $color-border;
+  border-radius: $border-radius-small;
+  padding: $spacing-xx-small 0;
+  font-size: $font-size-small;
+  background: $color-background-alt;
+  box-shadow: $shadow-drop-down;
+  transform: translateX(if-ltr(-50%, 50%));
+
+  /**
+   * @summary Positions dropdown to left side of target
+   * @selector .nds-dropdown_left
+   * @restrict .nds-dropdown
+   * @modifier
+   * @group position
+   */
+  &_left,
+  &--left {
+    #{$left}: 0;
+    transform: translateX(0);
+  }
+
+  /**
+   * @summary Positions dropdown to right side of target
+   * @selector .nds-dropdown_right
+   * @restrict .nds-dropdown
+   * @modifier
+   * @group position
+   */
+  &_right,
+  &--right {
+    #{$left}: auto;
+    #{$right}: 0;
+    transform: translateX(0);
+  }
+
+  /**
+   * @summary Positions dropdown to above target
+   * @selector .nds-dropdown_bottom
+   * @restrict .nds-dropdown
+   * @modifier
+   * @group position
+   */
+  &_bottom,
+  &--bottom {
+    bottom: 100%;
+  }
+
+  /**
+   * @summary Sets min-width of 6rem/96px
+   * @selector .nds-dropdown_xx-small
+   * @restrict .nds-dropdown
+   * @modifier
+   * @group width
+   */
+  &_xx-small,
+  &--xx-small {
+    min-width: $size-x-small;
+  }
+
+  /**
+   * @summary Sets min-width of 12rem/192px
+   * @selector .nds-dropdown_x-small
+   * @restrict .nds-dropdown
+   * @modifier
+   * @group width
+   */
+  &_x-small,
+  &--x-small {
+    min-width: $size-x-small;
+  }
+
+  /**
+   * @summary Sets min-width of 15rem/240px
+   * @selector .nds-dropdown_small
+   * @restrict .nds-dropdown
+   * @modifier
+   * @group width
+   */
+  &_small,
+  &--small {
+    min-width: $size-small;
+  }
+
+  /**
+   * @summary Sets min-width of 20rem/320px
+   * @selector .nds-dropdown_medium
+   * @restrict .nds-dropdown
+   * @modifier
+   * @group width
+   */
+  &_medium,
+  &--medium {
+    min-width: $size-medium;
+  }
+
+  /**
+   * @summary Sets min-width of 25rem/400px
+   * @selector .nds-dropdown_large
+   * @restrict .nds-dropdown
+   * @modifier
+   * @group width
+   */
+  &_large,
+  &--large {
+    min-width: $size-large;
+    max-width: $max-width-action-overflow-menu;
+  }
+
+  /**
+   * @summary Sets min-width of 25rem/400px
+   * @selector .nds-dropdown_large
+   * @restrict .nds-dropdown
+   * @modifier
+   * @group width
+   */
+  &_fluid,
+  &--fluid {
+    min-width: auto;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  /**
+   * @summary Forces overflow scrolling after 5 list items
+   * @selector .nds-dropdown_length-5
+   * @restrict .nds-dropdown, .nds-dropdown__list, .nds-listbox
+   * @modifier
+   * @group height
+   */
+  &_length-5,
+  &--length-5 {
+    @include dropdown-overflow-length(5);
+  }
+
+  /**
+   * @summary Forces overflow scrolling after 7 list items
+   * @selector .nds-dropdown_length-7
+   * @restrict .nds-dropdown, .nds-dropdown__list, .nds-listbox
+   * @modifier
+   * @group height
+   */
+  &_length-7,
+  &--length-7 {
+    @include dropdown-overflow-length(7);
+  }
+
+  /**
+   * @summary Forces overflow scrolling after 10 list items
+   * @selector .nds-dropdown_length-10
+   * @restrict .nds-dropdown, .nds-dropdown__list, .nds-listbox
+   * @modifier
+   * @group height
+   */
+  &_length-10,
+  &--length-10 {
+    @include dropdown-overflow-length(10);
+  }
+
+  /**
+   * @summary Forces overflow scrolling after 5 list items with an icon
+   * @selector .nds-dropdown_length-with-icon-5
+   * @restrict .nds-dropdown, .nds-dropdown__list, .nds-listbox
+   * @modifier
+   * @group height
+   */
+  &_length-with-icon-5,
+  &--length-with-icon-5 {
+    @include dropdown-overflow-length(5, $icon-size: $square-icon-small-boundary);
+  }
+
+  /**
+   * @summary Forces overflow scrolling after 7 list items with an icon
+   * @selector .nds-dropdown_length-with-icon-7
+   * @restrict .nds-dropdown, .nds-dropdown__list, .nds-listbox
+   * @modifier
+   * @group height
+   */
+  &_length-with-icon-7,
+  &--length-with-icon-7 {
+    @include dropdown-overflow-length(7, $icon-size: $square-icon-small-boundary);
+  }
+
+  /**
+   * @summary Forces overflow scrolling after 10 list items with an icon
+   * @selector .nds-dropdown_length-with-icon-10
+   * @restrict .nds-dropdown, .nds-dropdown__list, .nds-listbox
+   * @modifier
+   * @group height
+   */
+  &_length-with-icon-10,
+  &--length-with-icon-10 {
+    @include dropdown-overflow-length(10, $icon-size: $square-icon-small-boundary);
+  }
+
+  /**
+   * @summary Theme
+   * @selector .nds-dropdown_inverse
+   * @restrict .nds-dropdown
+   * @modifier
+   * @group theme
+   */
+  &_inverse,
+  &--inverse {
+    background: $color-background-inverse;
+    border-color: $color-border-inverse;
+
+    .nds-dropdown__item > a {
+      color: $color-text-inverse;
+
+      &:hover,
+      &:focus {
+        color: $color-text-link-inverse-hover;
+        background-color: transparent;
+      }
+
+      &:active {
+        color: $color-text-link-inverse-active;
+        background-color: transparent;
+      }
+
+      &[aria-disabled="true"] {
+        color: $color-text-link-inverse-disabled;
+        cursor: default;
+
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  // Typeahead stuff
+  mark {
+    font-weight: $font-weight-bold;
+    background-color: transparent;
+  }
+
+  // Adjust position of dropdown with top nubbin
+  &[class*="nds-nubbin_top"],
+  &[class*="nds-nubbin--top"] {
+    margin-top: ($square-tooltip-nubbin / 2);
+  }
+
+  // Adjust position of dropdown with bottom nubbin
+  &[class*="nds-nubbin_bottom"],
+  &[class*="nds-nubbin--bottom"] {
+    margin-bottom: ($square-tooltip-nubbin / 2);
+  }
+
+  @include deprecate('4.0.0') {
+
+    &_nubbin-top,
+    &--nubbin-top {
+      @include nubbin(top, 'before');
+      @include nubbin(top);
+      margin-top: ($square-tooltip-nubbin / 2);
+
+      &:before {
+        background: $color-background-alt;
+      }
+
+      &:after {
+        background: $color-background-alt;
+        box-shadow: -1px -1px 0 0 rgba(0, 0, 0, 0.16);
+        z-index: -1;
+      }
+
+      &.nds-dropdown_left,
+      &.nds-dropdown--left {
+        #{$left}: ($spacing-medium * -1);
+
+        &:before,
+        &:after {
+          #{$left}: $spacing-large;
+          margin-#{$left}: 0;
+        }
+      }
+
+      &.nds-dropdown_right,
+      &.nds-dropdown--right {
+        #{$right}: ($spacing-medium * -1);
+
+        &:before,
+        &:after {
+          #{$left}: auto;
+          #{$right}: $spacing-large;
+          margin-#{$left}: 0;
+        }
+      }
+    }
+  }
+
+  /**
+   * @summary Adds padding to area above dropdown menu list
+   * @selector .nds-dropdown__header
+   * @restrict .nds-dropdown li
+   */
+  &__header {
+    padding: $spacing-x-small $spacing-small;
+  }
+
+  /**
+   * @summary Initializes dropdown item
+   * @selector .nds-dropdown__item
+   * @restrict .nds-dropdown li
+   * @required
+   */
+  &__item {
+    line-height: $line-height-text;
+
+    > a {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      padding: $spacing-x-small $spacing-small;
+      color: $color-text-default;
+      white-space: nowrap;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        outline: 0;
+        text-decoration: none;
+        background-color: $color-background-row-hover;
+      }
+
+      &:active {
+        text-decoration: none;
+        background-color: $color-background-row-active;
+      }
+
+      &[aria-disabled="true"] {
+        color: $color-text-button-default-disabled;
+        cursor: default;
+
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+
+    /**
+     * @summary If menu contains menuitemcheckbox then this toggles the selected icon when it is selected
+     * @selector .nds-icon_selected
+     * @restrict .nds-dropdown__item svg
+     */
+    .nds-icon_selected,
+    .nds-icon--selected {
+      opacity: 0;
+      transition: opacity $duration-immediately ease;
+    }
+
+    /**
+     * @summary If menu contains menuitemcheckbox then this handles the selected states
+     * @selector .nds-is-selected
+     * @restrict .nds-dropdown__item
+     * @modifier
+     */
+    &.nds-is-selected .nds-icon_selected,
+    &.nds-is-selected .nds-icon--selected {
+      opacity: 1;
+    }
+  }
+
+  @include deprecate('4.0.0') {
+
+    .nds-has-icon {
+      position: relative;
+
+      &_left > a,
+      &--left > a,
+      &_left > span,
+      &--left > span {
+        padding-#{$left}: $spacing-x-large;
+      }
+
+      &_right > a,
+      &--right > a,
+      &_right > span,
+      &--right > span {
+        padding-#{$right}: $spacing-x-large;
+      }
+
+      &_left-right > a,
+      &--left-right > a,
+      &_left-right > span,
+      &--left-right > span {
+        padding: {
+          #{$left}: $spacing-x-large;
+          #{$right}: $spacing-x-large;
+        }
+      }
+
+      .nds-icon {
+        @include square($square-icon-medium-content);
+        position: absolute;
+        top: 50%;
+        margin-top: (($square-icon-medium-content / 2) * -1);
+        fill: $color-text-icon-default;
+
+        &_left,
+        &--left {
+          #{$left}: $spacing-small;
+        }
+
+        &_right,
+        &--right {
+          #{$right}: $spacing-small;
+        }
+      }
+    }
+  } // Deprecate has-icon
+}

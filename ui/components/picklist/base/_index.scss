@@ -1,0 +1,109 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @name base
+ * @selector .nds-combobox-picklist
+ * @restrict div
+ * @variant
+ * @s1 false
+ */
+
+@include deprecate('4.0.0', 'A picklist should use the readonly version of a combobox') {
+
+  .nds-picklist {
+    position: relative;
+
+    // Force width on picklist
+    .nds-dropdown {
+      width: $size-small;
+    }
+
+    li {
+      /**
+       * Set default state of icon for when a listbox option is selected
+       *
+       * @selector .nds-icon_selected
+       * @restrict .nds-picklist li svg
+       * @required
+       */
+      .nds-icon_selected,
+      .nds-icon--selected {
+        opacity: 0;
+        transition: opacity $duration-immediately ease;
+      }
+
+      /**
+       * Toggles state of icon for when a listbox option is selected
+       *
+       * @selector .nds-is-selected
+       * @restrict .nds-picklist li
+       * @modifier
+       * @required
+       */
+      &.nds-is-selected .nds-icon_selected,
+      &.nds-is-selected .nds-icon--selected {
+        fill: $color-text-icon-default-hover;
+        opacity: 1;
+      }
+    }
+
+    /**
+     * Resets explicit width on picklist to be fluid to its parent element
+     *
+     * @selector .nds-picklist_fluid
+     * @restrict .nds-picklist
+     * @modifier
+     */
+    &_fluid,
+    &--fluid {
+
+      .nds-picklist__input,
+      .nds-picklist__label,
+      .nds-dropdown,
+      .nds-lookup {
+        width: auto;
+        min-width: 0;
+        max-width: $size-small;
+      }
+    }
+  }
+
+  /**
+   * Read-only input element for picklist
+   *
+   * @selector .nds-picklist__input
+   * @restrict .nds-picklist .nds-form-element__control
+   * @required
+   */
+  .nds-picklist__input {
+    width: $size-small;
+
+    .nds-button {
+      line-height: 0;
+    }
+  }
+}
+
+@include deprecate('4.0.0', 'Use lookup classes instead') {
+
+  .nds-picklist__label {
+    padding-#{$right}: $spacing-x-large;
+    width: $size-small;
+    color: $color-text-default;
+    text-align: $left;
+
+    .nds-icon {
+      @include square($square-icon-small-content);
+      position: absolute;
+      #{$right}: $spacing-medium;
+      top: 50%;
+      margin-top: (($square-icon-small-content / 2) * -1);
+      fill: $color-text-icon-default;
+    }
+
+    .nds-truncate {
+      display: block;
+    }
+  }
+}

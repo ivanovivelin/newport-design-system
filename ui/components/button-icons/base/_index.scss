@@ -1,0 +1,366 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+* @summary Creates a button that looks like a plain icon
+*
+* @name base
+* @selector .nds-button_icon
+* @restrict button
+* @variant
+*/
+.nds-button_icon,
+.nds-button--icon,
+.nds-button_icon-inverse,
+.nds-button--icon-inverse,
+.nds-button_icon-container,
+.nds-button--icon-container,
+.nds-button_icon-border,
+.nds-button--icon-border,
+.nds-button_icon-border-filled,
+.nds-button--icon-border-filled,
+.nds-button_icon-border-inverse,
+.nds-button--icon-border-inverse,
+.nds-button_icon-more,
+.nds-button--icon-more,
+.nds-button_icon-error,
+.nds-button--icon-error {
+  line-height: $line-height-reset;
+  vertical-align: middle;
+  color: $color-text-icon-default;
+}
+
+@include deprecate('4.0.0', 'Use .nds-button--icon instead') {
+
+  .nds-button_icon-bare,
+  .nds-button--icon-bare {
+    line-height: $line-height-reset;
+    vertical-align: middle;
+    color: $color-text-icon-default;
+  }
+}
+
+/**
+ * @summary Default width + height for button icon with containers
+ * @name Default
+ * @selector .nds-button_icon-container
+ * @restrict .nds-button_icon
+ * @modifier
+ * @group container-size
+ */
+
+// Append class to this list if it requires a default size of 2x2rem
+.nds-button_icon-container,
+.nds-button--icon-container,
+.nds-button_icon-border,
+.nds-button--icon-border,
+.nds-button_icon-border-filled,
+.nds-button--icon-border-filled,
+.nds-button_icon-border-inverse,
+.nds-button--icon-border-inverse {
+  @include square($square-icon-medium-boundary);
+}
+
+/**
+ * @summary Creates an icon button with a border
+ * @name Transparent background
+ * @selector .nds-button_icon-border
+ * @restrict .nds-button_icon
+ * @modifier
+ * @group borders
+ */
+.nds-button_icon-border-filled,
+.nds-button--icon-border-filled,
+.nds-button_icon-border,
+.nds-button--icon-border {
+  @include button-icon;
+  border-color: $button-color-border-primary;
+}
+
+/**
+ * @summary Gives a white icon color on a dark background
+ * @selector .nds-button_icon-border-inverse
+ * @restrict .nds-button_icon
+ * @group borders
+ */
+.nds-button_icon-border-inverse,
+.nds-button--icon-border-inverse {
+  @include button-icon;
+  background-color: $color-background-button-inverse;
+  color: $color-text-link-inverse;
+
+  &[disabled] {
+    background-color: $color-background-button-inverse-disabled;
+    border-color: $color-border-button-inverse-disabled;
+  }
+}
+
+/**
+ * @summary Button icon with background
+ * @name Filled background
+ * @selector .nds-button_icon-border-filled
+ * @restrict .nds-button_icon
+ * @modifier
+ * @group borders
+ */
+.nds-button_icon-border-filled,
+.nds-button--icon-border-filled {
+  background-color: $button-color-background-primary;
+
+  &[disabled] {
+    border-color: $button-color-border-primary;
+    background-color: $color-background-button-default-disabled;
+  }
+}
+
+/**
+ * @summary Button icon on inversed background
+ * @selector .nds-button_icon-inverse
+ * @restrict .nds-button_icon
+ * @group color
+ */
+.nds-button_icon-inverse,
+.nds-button--icon-inverse {
+  color: $color-text-link-inverse;
+
+  &:hover,
+  &:focus {
+    color: $color-text-link-inverse-hover;
+  }
+
+  &:focus {
+    @include focus-inverse;
+  }
+
+  &:active {
+    color: $color-text-link-inverse-active;
+  }
+
+  &[disabled] {
+    color: $color-text-link-inverse-disabled;
+  }
+}
+
+/**
+ * @summary Button icon for errors
+ * @selector .nds-button_icon-error
+ * @restrict .nds-button_icon
+ */
+.nds-button_icon-error,
+.nds-button--icon-error {
+
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    color: $color-text-error;
+  }
+}
+
+// Stateful Button Icon
+.nds-button_icon-container.nds-is-selected,
+.nds-button--icon-container.nds-is-selected,
+.nds-button_icon-border.nds-is-selected,
+.nds-button--icon-border.nds-is-selected,
+.nds-button_icon-border-filled.nds-is-selected {
+  @include button-brand;
+
+  .nds-button__icon {
+    fill: $color-text-button-brand;
+  }
+}
+
+/**
+ * @summary Button icon container - size small modifier
+ * @name small
+ * @selector .nds-button_icon-small
+ * @restrict .nds-button_icon
+ * @modifier
+ * @group container-size
+ */
+.nds-button_icon-small,
+.nds-button--icon-small {
+  @include square($square-icon-small-boundary);
+  border-radius: $border-radius-small;
+}
+
+/**
+ * @summary Button icon container - size x-small modifier
+ * @name x-small
+ * @selector .nds-button_icon-x-small
+ * @restrict .nds-button_icon
+ * @modifier
+ * @group container-size
+ */
+.nds-button_icon-x-small,
+.nds-button--icon-x-small {
+  @include square($square-icon-x-small-boundary);
+  border-radius: $border-radius-small;
+  line-height: $line-height-reset;
+
+  .nds-button__icon {
+    @include square($square-icon-small-content);
+  }
+}
+
+/**
+ * @summary Button icon container - size xx-small modifier
+ * @name xx-small
+ * @selector .nds-button_icon-xx-small
+ * @restrict .nds-button_icon
+ * @modifier
+ * @group container-size
+ */
+.nds-button_icon-xx-small,
+.nds-button--icon-xx-small {
+  @include square($square-icon-xx-small-boundary);
+  border-radius: $border-radius-small;
+  line-height: $line-height-reset;
+
+  .nds-button__icon {
+    @include square($square-icon-x-small-content);
+  }
+}
+
+
+/**
+ * @summary Button icon with dropdown
+ *
+ * @name icon-with-dropdown
+ * @selector .nds-button_icon-more
+ * @restrict button
+ * @variant
+ */
+.nds-button_icon-more,
+.nds-button--icon-more {
+  @include button-icon;
+  line-height: $line-height-button;
+  padding: 0 $spacing-x-small;
+  background-color: $button-color-background-primary;
+  border-color: $button-color-border-primary;
+
+  &-filled {
+    background-color: $color-background-button-default;
+  }
+
+  &:hover,
+  &:focus {
+
+    .nds-button__icon {
+      fill: $color-text-icon-default-hover;
+    }
+  }
+
+  &:active .nds-button__icon {
+    fill: $color-text-icon-default-active;
+  }
+
+  &[disabled] {
+    cursor: default;
+
+    .nds-button__icon {
+      fill: $color-text-icon-default-disabled;
+    }
+  }
+}
+// WTF is going on here?
+.nds-button_icon-container-more,
+.nds-button--icon-container-more {
+  line-height: $line-height-button;
+  padding: 0 $spacing-x-small;
+  vertical-align: middle;
+}
+
+/**
+ * The stateful button requires the `.nds-button--icon-border` class in addition to the `.nds-button` class.
+ *
+ * The stateful inverse button works just like the stateful button. It requires the `.nds-button--icon-border-inverse` class in addition to the `.nds-button` class.
+ *
+ * Stateful icons can be toggled on and off and retain their state. JavaScript is used to add the `.nds-is-selected` class to the button when activated.
+ *
+ * #### Accessibility
+ *
+ * For accessibility, implement the [ARIA Toggle Button](http://w3c.github.io/aria-practices/#button) concept.
+ * - Similar to a mute button, the button represents a pressed or unpressed state.
+ * - Button text doesn't change per state
+ * - `aria-pressed` is set to `true` or `false`, depending its state
+ *
+ * @summary Stateful Button Icon
+ * @name stateful
+ * @selector .nds-is-selected
+ * @restrict .nds-button_icon
+ * @variant
+ */
+.nds-button--icon-container.nds-is-selected,
+.nds-button--icon-border.nds-is-selected,
+.nds-button--icon-border-filled.nds-is-selected {
+  @include button-brand;
+
+  .nds-button__icon {
+    fill: $color-text-button-brand;
+  }
+
+  &:hover,
+  &:focus {
+
+    .nds-button__icon {
+      fill: $color-text-button-brand;
+    }
+  }
+}
+
+/**
+ * @summary A parent class must be put on anything that contains a .nds-button__icon_hint so that the child reacts when the parent is hovered.
+ * @selector .nds-button__icon_hint
+ * @restrict .nds-button_icon .nds-button__icon
+ */
+.nds-button__icon_hint,
+.nds-button__icon--hint {
+  fill: $color-text-icon-default-hint;
+}
+
+/**
+ * A parent class must be put on anything that contains
+ * a .nds-button__icon_inverse-hint so that the child reacts
+ * when the parent is hovered. This is for a dark background.
+ *
+ * @selector .nds-button__icon_inverse-hint
+ * @restrict .nds-button_icon .nds-button__icon
+ */
+.nds-button__icon_inverse-hint,
+.nds-button__icon--inverse-hint {
+  fill: $color-text-icon-inverse-hint;
+}
+
+// Parent class for hint parent
+// How do we document this?
+.nds-hint-parent {
+
+  .nds-button_icon-border-inverse,
+  .nds-button--icon-border-inverse {
+    border-color: $color-border-icon-inverse-hint;
+
+    &:focus {
+      border-color: $color-border-icon-inverse-hint-hover;
+    }
+  }
+
+  &:hover,
+  &:focus {
+
+    .nds-button_icon-border-inverse,
+    .nds-button--icon-border-inverse {
+      border-color: $color-border-icon-inverse-hint-hover;
+    }
+
+    .nds-button__icon_hint,
+    .nds-button__icon--hint {
+      fill: $color-text-icon-default;
+    }
+
+    .nds-button__icon_inverse-hint,
+    .nds-button__icon--inverse-hint {
+      fill: $color-text-icon-inverse-hint-hover;
+    }
+  }
+}

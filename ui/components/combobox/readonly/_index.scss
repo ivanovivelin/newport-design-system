@@ -1,0 +1,15 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Container that manages layout when a listbox of pill options sit next to a combobox search input
+ *
+ * @name readonly
+ * @selector [readonly]
+ * @restrict .nds-combobox_container input
+ * @variant
+ */
+
+.nds-has-error {
+  @include form-input-error('[role="combobox"] input[readonly]');
+}

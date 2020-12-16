@@ -1,0 +1,128 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Initializes an accordion list with more than one section that will have its display toggled by invoking an interaction on the summary title
+ *
+ * @name base
+ * @selector .nds-accordion
+ * @restrict ul
+ * @variant
+ * @required
+ * @support dev-ready
+ */
+.nds-accordion {
+  position: relative;
+}
+
+/**
+ * List item for each accordion section
+ *
+ * @selector .nds-accordion__list-item
+ * @restrict .nds-accordion li
+ * @required
+ */
+.nds-accordion__list-item {
+  border-top: $border-width-thin solid $color-border;
+
+  &:first-child {
+    border-top: 0;
+  }
+}
+
+/**
+ * Summary title for each expandable panel inside of an accordion
+ *
+ * @selector .nds-accordion__summary
+ * @restrict .nds-accordion__section div
+ * @required
+ */
+.nds-accordion__summary {
+  display: flex;
+}
+
+/**
+ * Summary title for each expandable panel inside of an accordion
+ *
+ * @selector .nds-accordion__summary-heading
+ * @restrict .nds-accordion__section h3
+ * @required
+ */
+.nds-accordion__summary-heading {
+  display: flex;
+  flex-grow: 1;
+}
+
+/**
+ * Actionable button inside of accordion summary that would toggle the visibility of each section
+ *
+ * @selector .nds-accordion__summary-action
+ * @restrict .nds-accordion__summary button
+ * @required
+ */
+.nds-accordion__summary-action {
+  display: inline-flex;
+  flex-grow: 1;
+  align-items: center;
+  min-width: 0;
+}
+
+/**
+ * Icon inside of actionable button within an accordion section
+ *
+ * @selector .nds-accordion__summary-action-icon
+ * @restrict .nds-accordion__summary-action svg
+ * @required
+ */
+.nds-accordion__summary-action-icon {
+  flex-shrink: 0;
+  transform: rotate(-90deg);
+}
+
+/**
+ * Each expandable panel inside of an accordion
+ *
+ * @selector .nds-accordion__section
+ * @restrict .nds-accordion section
+ * @required
+ */
+.nds-accordion__section {
+  padding: $spacing-small;
+}
+
+/**
+ * Each expandable panel inside of an accordion
+ *
+ * @selector .nds-accordion__content
+ * @restrict .nds-accordion__section div
+ * @required
+ */
+.nds-accordion__content {
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+}
+
+/**
+ * Toggle visibility of accordion section + rotate icon
+ *
+ * @selector .nds-is-open
+ * @restrict .nds-accordion__section
+ * @modifier
+ */
+.nds-is-open {
+
+  .nds-accordion__summary {
+    margin-bottom: $spacing-small;
+  }
+
+  .nds-accordion__summary-action-icon {
+    transform: rotate(0deg);
+  }
+
+  .nds-accordion__content {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+  }
+}

@@ -1,0 +1,203 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+.nds-spinner_container {
+  position: fixed;
+  top: 0;
+  #{$right}: 0;
+  bottom: 0;
+  #{$left}: 0;
+  z-index: $z-index-spinner;
+  background-color: $color-background-temp-modal-tint-alt;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.2s ease, visibility 0s;
+  transition-delay: 0s, 0.3s;
+}
+
+/* Follow production class names (not starting with nds-) */
+/* stylelint-disable selector-class-pattern */
+.nds-spinner_container.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease, visibility 0s;
+  transition-delay: 0s, 0s;
+}
+
+.nds-spinner_container.hide {
+  display: none;
+}
+/* stylelint-enable selector-class-pattern */
+
+/**
+ * This is the gray base class for spinner
+ *
+ * @name base
+ * @selector .nds-spinner
+ * @restrict div
+ * @variant
+ */
+
+.nds-spinner {
+  width: 4.5rem;
+  #{$left}: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+
+  svg circle {
+    fill: $color-background-spinner-dot;
+    /* clean-css ignore:start */
+    r: 12.5%;
+    /* clean-css ignore:end */
+
+    &:nth-child(1) {
+      /* clean-css ignore:start */
+      cx: 12.5%;
+      /* clean-css ignore:end */
+    }
+
+    &:nth-child(2) {
+      /* clean-css ignore:start */
+      cx: 50%;
+      /* clean-css ignore:end */
+    }
+
+    &:nth-child(3) {
+      /* clean-css ignore:start */
+      cx: 87.5%;
+      /* clean-css ignore:end */
+    }
+  }
+}
+
+
+@media only screen and (max-width: 30em) {
+
+  .nds-spinner {
+    #{$left}: 40%;
+    top: 40%;
+  }
+}
+
+
+/**
+ * This creates the blue brand spinner
+ *
+ * @selector .nds-spinner_brand
+ * @restrict .nds-spinner
+ * @modifier
+ * @group color
+ */
+
+.nds-spinner_brand,
+.nds-spinner--brand {
+
+  svg circle {
+    fill: $color-brand;
+    stroke: none;
+  }
+}
+
+/**
+ * This creates the inverse spinner
+ *
+ * @selector .nds-spinner_inverse
+ * @restrict .nds-spinner
+ * @modifier
+ * @group color
+ */
+
+.nds-spinner_inverse,
+.nds-spinner--inverse {
+
+  svg circle {
+    fill: $color-background-alt;
+    stroke: none;
+  }
+}
+
+
+/**
+ * This is the extra extra small spinner
+ *
+ * @selector .nds-spinner_xx-small
+ * @restrict .nds-spinner
+ * @modifier
+ * @group size
+ */
+
+.nds-spinner_xx-small,
+.nds-spinner--xx-small {
+  width: 1rem;
+}
+
+
+/**
+ * This is the extra small spinner
+ *
+ * @selector .nds-spinner_x-small
+ * @restrict .nds-spinner
+ * @modifier
+ * @group size
+ */
+
+.nds-spinner_x-small,
+.nds-spinner--x-small {
+  width: 1.5rem;
+}
+
+/**
+ * This is the small spinner
+ *
+ * @selector .nds-spinner_small
+ * @restrict .nds-spinner
+ * @modifier
+ * @group size
+ */
+
+.nds-spinner_small,
+.nds-spinner--small {
+  width: 2.5rem;
+}
+
+/**
+ * This is the medium spinner
+ *
+ * @selector .nds-spinner_medium
+ * @restrict .nds-spinner
+ * @modifier
+ * @group size
+ */
+
+.nds-spinner_medium,
+.nds-spinner--medium {
+  width: 4rem;
+}
+
+/**
+ * This is the large spinner
+ *
+ * @selector .nds-spinner_large
+ * @restrict .nds-spinner
+ * @modifier
+ * @group size
+ */
+
+.nds-spinner_large,
+.nds-spinner--large {
+  width: 6rem;
+}
+
+/**
+ * This is the loading message, specifically for the large spinner
+ */
+/* stylelint-disable selector-class-pattern */
+.nds-spinner+.vlc-loading-message,
+.nds-spinner+.vlc-loading-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% + 2.75rem));
+}
+/* stylelint-enable selector-class-pattern */

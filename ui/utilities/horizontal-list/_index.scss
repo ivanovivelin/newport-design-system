@@ -1,0 +1,56 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Causes items of a list to display horizontally
+ *
+ * @selector .nds-list_horizontal
+ * @modifier
+ */
+.nds-list_horizontal,
+.nds-list--horizontal {
+  @include align-horizontal('.nds-list__item', true);
+}
+
+.nds-list_horizontal-large,
+.nds-list--horizontal-large {
+
+  > .nds-list__item > a {
+    padding: $spacing-small $spacing-medium;
+  }
+}
+
+/**
+ * @summary Adds dot separators to the left of horizontal list items
+ *
+ * @selector .nds-has-dividers_left
+ * @modifier
+ */
+.nds-has-dividers_left > .nds-list__item,
+.nds-has-dividers--left > .nds-list__item,
+.nds-has-dividers_left > .nds-item,
+.nds-has-dividers--left > .nds-item {
+  @include dot-separator(left);
+}
+
+/**
+ * @summary Adds dot separators to the right of horizontal list items
+ *
+ * @selector .nds-has-dividers_right
+ * @modifier
+ */
+.nds-has-dividers_right > .nds-list__item,
+.nds-has-dividers--right > .nds-list__item,
+.nds-has-dividers_right > .nds-item,
+.nds-has-dividers--right > .nds-item {
+  @include dot-separator(right);
+}
+
+// Deprecate in 0.15.0
+@include deprecate('4.0.0', 'Use has-dividers--{position} helpers instead') {
+
+  .nds-list_horizontal.nds-has-dividers > .nds-list__item,
+  .nds-list--horizontal.nds-has-dividers > .nds-list__item {
+    @include dot-separator;
+  }
+}

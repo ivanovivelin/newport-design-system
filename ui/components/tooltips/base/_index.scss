@@ -1,0 +1,158 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * The tooltip should be positioned with JavaScript.
+ *
+ * You can include inline help tooltips for form elements and any focusable items, such as anchor links, buttons, etc. If your tooltips are available on hover, also make sure that they’re available on keyboard focus. To allow screen readers to access the tooltip, the HTML form field element must  have an `aria-describedby` attribute that points to the tooltip `ID` of the tooltip.
+ *
+ * @summary Initializes a tooltip
+ *
+ * @variant
+ * @name base
+ * @selector .nds-popover_tooltip
+ * @restrict [role="tooltip"]
+ * @support dev-ready
+ */
+.nds-popover_tooltip,
+.nds-popover--tooltip {
+  width: auto;
+  max-width: $size-medium;
+  background: $color-background-alt-inverse;
+  border: 0;
+
+  .nds-popover__body {
+    font-size: $font-size-small;
+    font-weight: $font-weight-light;
+    color: $color-text-inverse;
+  }
+}
+
+/**
+ * @selector .nds-rise-from-ground
+ * @restrict .nds-popover_tooltip
+ * @modifier
+ * @group toggle
+ */
+.nds-rise-from-ground {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(0%, 0%);
+  transition:
+    opacity $duration-quickly linear,
+    visibility $duration-quickly linear,
+    transform $duration-quickly linear;
+  will-change: transform;
+}
+
+/**
+ * @selector .nds-fall-into-ground
+ * @restrict .nds-popover_tooltip
+ * @modifier
+ * @group toggle
+ */
+.nds-fall-into-ground {
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(0%, 0%);
+  transition:
+    opacity $duration-quickly linear,
+    visibility $duration-quickly linear,
+    transform $duration-quickly linear;
+  will-change: transform;
+}
+
+.nds-slide-from-bottom-to-top {
+  transform: translateY(10%);
+  will-change: transform;
+}
+
+.nds-slide-from-top-to-bottom {
+  transform: translateY(-10%);
+  will-change: transform;
+}
+
+.nds-slide-from-right-to-left {
+  transform: translateX(5%);
+  will-change: transform;
+}
+
+.nds-slide-from-left-to-right {
+  transform: translateX(-5%);
+  will-change: transform;
+}
+
+// Done-zo -- DON'T USE
+.nds-tooltip {
+  @include deprecate('4.0.0') {
+    @include popover($color: $color-background-inverse);
+
+    &__body {
+      padding: $spacing-x-small $spacing-small;
+      font-size: $font-size-small;
+      color: $color-text-inverse;
+    }
+  }
+}
+
+.nds-form-element .nds-tooltip__container {
+  position: absolute;
+  z-index: 1;
+}
+
+.nds-tooltip__container section.nds-popover {
+  position: absolute;
+}
+
+.nds-form-container.nds-relative-tooltip {
+  display: flex;
+}
+
+.nds-relative-tooltip .nds-tooltip__container,
+.nds-radio-relative-tooltip .nds-tooltip__container {
+  position: relative;
+  order: 2;
+}
+
+.nds-relative-tooltip div.nds-form-element__control,
+.nds-radio-relative-tooltip div.nds-form-element__control {
+  order: 1;
+}
+
+.nds-relative-tooltip .nds-tooltip__container {
+  top: 0;
+}
+
+.nds-radio-relative-tooltip .nds-tooltip__container {
+  top: -2px;
+}
+
+.nds-relative-tooltip .nds-form-element__label {
+  overflow: visible;
+}
+
+.nds-datetime-tooltip span {
+  position: relative;
+  top: 1.25rem;
+}
+
+.nds-tooltip__container .nds-button_icon {
+  pointer-events: visible;
+}
+
+.nds-radio-relative-tooltip span{
+  margin-right: .5rem;
+}
+
+.nds-radio-relative-tooltip {
+  overflow: visible;
+  margin-top: 0.3rem;
+}
+
+.nds-checkbox__label {
+  ~.nds-tooltip__container {
+    .nds-button_icon {
+      margin-bottom: 0.125rem;
+    }
+  }
+}

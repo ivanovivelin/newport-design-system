@@ -1,0 +1,38 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Initialize textarea
+ *
+ * @name base
+ * @selector .nds-textarea
+ * @restrict textarea
+ * @required
+ * @variant
+ */
+.nds-textarea {
+  @include form-states;
+  resize: vertical;
+  border: 0;
+  border-bottom: 1px solid $color-border-input;
+  padding: $spacing-x-small 0;
+  border-radius: 0;
+
+  &:active,
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.nds-has-error {
+  @include form-input-error('.nds-textarea');
+}
+
+.nds-has-error .nds-textarea {
+
+  &,
+  &:active,
+  &:focus {
+    box-shadow: none;
+  }
+}

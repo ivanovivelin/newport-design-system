@@ -1,0 +1,41 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+.nds-modal_form,
+.nds-modal--form {
+
+  .nds-modal__header,
+  .nds-modal__content:last-child {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .nds-modal__container {
+    margin: 0;
+    padding: 0;
+  }
+
+  .nds-modal__header .nds-text-heading_medium,
+  .nds-modal__header .nds-text-heading--medium {
+    // Unfortunately necessary to line up text with buttons
+    line-height: $line-height-text;
+  }
+
+
+
+  .nds-modal__header .nds-button {
+    display: inline-block;
+    width: auto;
+
+    &:first-child {
+      float: $left;
+      margin-#{$right}: $spacing-x-small;
+
+      + .nds-button {
+        float: $right;
+        margin-top: 0;
+        margin-#{$left}: $spacing-x-small;
+      }
+    }
+  }
+}

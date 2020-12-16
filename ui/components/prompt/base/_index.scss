@@ -1,0 +1,36 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @summary Initializes Prompt style notification
+ *
+ * @name base
+ * @selector .nds-modal_prompt
+ * @restrict .nds-modal
+ * @required
+ * @variant
+ */
+.nds-modal_prompt,
+.nds-modal--prompt {
+
+  .nds-modal__header {
+    border-bottom: 0;
+  }
+
+  .nds-modal__content {
+    padding-#{$left}: $spacing-x-large;
+    padding-#{$right}: $spacing-x-large;
+  }
+
+  .nds-modal__footer {
+    border-top: 0;
+    text-align: center;
+  }
+
+  @include deprecate('4.0.0', 'Close button should be removed from the markup') {
+
+    .nds-modal__close {
+      display: none;
+    }
+  }
+}

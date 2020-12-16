@@ -1,0 +1,114 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ * @name filtering
+ * @selector .nds-panel_filters
+ * @restrict .nds-panel
+ * @variant
+ * @s1 false
+ */
+.nds-panel_filters,
+.nds-panel--filters {
+  margin-#{$left}: $spacing-medium;
+  box-shadow: $shadow-drop-down;
+  border-radius: 0;
+}
+
+/**
+ * @selector .nds-filters
+ * @restrict .nds-panel_filters div
+ * @required
+ */
+.nds-filters {
+  position: relative;
+}
+
+/**
+ * Filters Header
+ *
+ * @selector .nds-filters__header
+ * @restrict .nds-panel_filters div
+ * @required
+ */
+.nds-filters__header {
+  padding: $spacing-x-small $spacing-small;
+}
+
+/**
+ * Filters Body
+ *
+ * @selector .nds-filters__body
+ * @restrict .nds-panel_filters div
+ * @required
+ */
+.nds-filters__body {
+  padding: $spacing-x-small $spacing-small;
+}
+
+/**
+ * Filters Footer
+ *
+ * @selector .nds-filters__footer
+ * @restrict .nds-panel_filters div
+ * @required
+ */
+.nds-filters__footer {
+  padding: $spacing-x-small $spacing-medium;
+}
+
+/**
+ * Filterable Item
+ *
+ * @selector .nds-filters__item
+ * @restrict .nds-panel_filters li div
+ * @required
+ */
+.nds-filters__item {
+  padding: $spacing-small;
+  background: $color-background-button-default;
+  border: $border-width-thin solid $color-border-button-default;
+  border-radius: $border-radius-medium;
+
+  /**
+   * Indicates that a filter is new and hasn't been saved
+   *
+   * @selector .nds-is-new
+   * @restrict .nds-filters__item
+   * @modifier
+   */
+  &.nds-is-new {
+    background: $color-background-highlight;
+    color: $color-text-default;
+  }
+
+  /**
+   * Indicates that a filter has an error
+   *
+   * @selector .nds-has-error
+   * @restrict .nds-filters__item
+   * @modifier
+   */
+  &.nds-has-error {
+    border-color: $color-border-error;
+  }
+
+  /**
+   * Indicates that a filter is locked
+   *
+   * @selector .nds-is-locked
+   * @restrict .nds-filters__item
+   * @modifier
+   */
+  &.nds-is-locked {
+    background: $color-background;
+  }
+
+  + .nds-filters__item {
+    margin-top: $spacing-x-small;
+  }
+
+  &:hover {
+    background: $color-background-button-default-hover;
+  }
+}

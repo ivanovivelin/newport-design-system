@@ -1,0 +1,132 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+/**
+ *
+ * @summary Initiates a stateful button
+ *
+ * @name stateful
+ * @selector .nds-button_stateful
+ * @restrict button, a, span
+ * @variant
+ */
+
+.nds-button_neutral.nds-is-selected,
+.nds-button--neutral.nds-is-selected {
+  border-color: transparent;
+  background-color: transparent;
+
+  &:hover:not([disabled]),
+  &:focus:not([disabled]) {
+    border-color: $button-color-border-primary;
+    background-color: $color-background-button-default-hover;
+  }
+
+  &:active:not([disabled]) {
+    background-color: $color-background-button-default-active;
+  }
+}
+
+// Icon modifier for stateful buttons
+.nds-button__icon_stateful,
+.nds-button__icon--stateful {
+  @include square($square-icon-small-content);
+  fill: currentColor;
+}
+
+// Inverse Button
+.nds-button_inverse.nds-is-selected,
+.nds-button--inverse.nds-is-selected {
+  border-color: transparent;
+}
+
+/**
+ * Default state of a stateful button
+ *
+ * @selector .nds-not-selected
+ * @restrict .nds-button_stateful
+ * @notes This class should be toggled with JavaScript
+ * @modifier
+ * @group interaction
+ */
+.nds-not-selected {
+
+  .nds-text-selected {
+    display: none;
+  }
+
+  .nds-text-selected-focus {
+    display: none;
+  }
+
+  .nds-text-not-selected {
+    display: block;
+  }
+}
+
+/**
+ * When button is selected and still has focus from click
+ *
+ * @selector .nds-is-selected-clicked
+ * @restrict .nds-button_stateful
+ * @notes This class should be toggled with JavaScript
+ * @modifier
+ * @group interaction
+ */
+.nds-is-selected-clicked,
+.nds-is-selected[disabled],
+.nds-is-selected[disabled]:hover,
+.nds-is-selected[disabled]:focus {
+
+  .nds-text-selected {
+    display: block;
+  }
+
+  .nds-text-selected-focus {
+    display: none;
+  }
+
+  .nds-text-not-selected {
+    display: none;
+  }
+}
+
+/**
+ * When button is pressed and selected
+ *
+ * @selector .nds-is-selected
+ * @restrict .nds-button_stateful
+ * @notes This class should be toggled with JavaScript
+ * @modifier
+ * @group interaction
+ */
+.nds-is-selected {
+
+  .nds-text-not-selected {
+    display: none;
+  }
+
+  .nds-text-selected {
+    display: block;
+  }
+
+  .nds-text-selected-focus {
+    display: none;
+  }
+
+  &:hover,
+  &:focus {
+
+    .nds-text-not-selected {
+      display: none;
+    }
+
+    .nds-text-selected {
+      display: none;
+    }
+
+    .nds-text-selected-focus {
+      display: block;
+    }
+  }
+}

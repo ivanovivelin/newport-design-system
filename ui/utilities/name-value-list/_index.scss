@@ -1,0 +1,62 @@
+// Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
+// Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
+
+.nds-list_horizontal,
+.nds-list--horizontal {
+  /**
+   * @summary Label of the name-value pair variant. Layout is modified by its parent class.
+   *
+   * @selector .nds-item_label
+   * @modifier
+   */
+  .nds-item_label,
+  .nds-item--label {
+    width: 30%;
+    padding-#{$right}: $spacing-small;
+  }
+
+  /**
+   * @summary Label of the name-value pair variant. Layout is modified by its parent class.
+   *
+   * @selector .nds-item_detail
+   * @modifier
+   */
+  .nds-item_detail,
+  .nds-item--detail {
+    width: 70%;
+  }
+}
+
+.nds-list_vertical,
+.nds-list--vertical {
+
+  .nds-item_label,
+  .nds-item--label,
+  .nds-item_detail,
+  .nds-item--detail {
+    display: block;
+  }
+}
+
+.nds-list_inline,
+.nds-list--inline {
+  display: inline-flex;
+  max-width: 100%;
+
+  .nds-item_label,
+  .nds-item--label {
+    max-width: 180px;
+    padding-#{$right}: $spacing-small;
+    flex-shrink: 0;
+
+    ~ .nds-item_label,
+    ~ .nds-item--label {
+      padding-#{$left}: $spacing-medium;
+    }
+  }
+
+  .nds-item_detail,
+  .nds-item--detail {
+    min-width: 0; // Respect width
+  }
+}
